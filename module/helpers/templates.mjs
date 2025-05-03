@@ -4,13 +4,13 @@
  * @return {Promise}
  */
 export const preloadHandlebarsTemplates = async function () {
-  return loadTemplates([
+  return foundry.applications.handlebars.loadTemplates([
     // Actor partials.
-    'systems/lady-blackbird/templates/actor/parts/actor-features.hbs',
-    'systems/lady-blackbird/templates/actor/parts/actor-items.hbs',
-    'systems/lady-blackbird/templates/actor/parts/actor-spells.hbs',
-    'systems/lady-blackbird/templates/actor/parts/actor-effects.hbs',
+    "systems/lady-blackbird/templates/actor/parts/actor-features.hbs",
+    "systems/lady-blackbird/templates/actor/parts/actor-items.hbs",
+    "systems/lady-blackbird/templates/actor/parts/actor-spells.hbs",
+    "systems/lady-blackbird/templates/actor/parts/actor-effects.hbs",
     // Item partials
-    'systems/lady-blackbird/templates/item/parts/item-effects.hbs',
+    "systems/lady-blackbird/templates/item/parts/item-effects.hbs",
   ]);
 };

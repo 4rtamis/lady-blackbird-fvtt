@@ -1,18 +1,22 @@
 {
   "name": "lady-blackbird",
-  "version": "2.0.0",
-  "description": "CSS compiler for the LadyBlackbird system",
+  "version": "0.0.1",
+  "description": "CSS compiler for the Lady Blackbird system",
   "scripts": {
-    "build": "sass src/scss/lady-blackbird.scss css/lady-blackbird.css --style=expanded --no-source-map",
-    "watch": "sass src/scss/lady-blackbird.scss css/lady-blackbird.css --style=expanded --source-map --watch"
+    "watch": "npx @tailwindcss/cli -i ./src/lady-blackbird.css -o ./css/lady-blackbird.css --watch"
   },
   "browserslist": [
     "last 3 versions"
   ],
-  "author": "Asacolips",
-  "license": "MIT",
+  "author": "Artamis",
+  "license": "CC-BY-NC-SA-4.0",
   "private": true,
   "devDependencies": {
+    "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
     "sass": "^1.53.0"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.5",
+    "tailwindcss": "^4.1.5"
   }
 }

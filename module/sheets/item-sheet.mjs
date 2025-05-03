@@ -1,24 +1,25 @@
 import {
   onManageActiveEffect,
   prepareActiveEffectCategories,
-} from '../helpers/effects.mjs';
+} from "../helpers/effects.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
  * @extends {ItemSheet}
  */
-export class LadyBlackbirdItemSheet extends ItemSheet {
+export class LadyBlackbirdItemSheet extends foundry.applications.sheets
+  .ItemSheetV2 {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ['lady-blackbird', 'sheet', 'item'],
+      classes: ["lady-blackbird", "sheet", "item"],
       width: 520,
       height: 480,
       tabs: [
         {
-          navSelector: '.sheet-tabs',
-          contentSelector: '.sheet-body',
-          initial: 'description',
+          navSelector: ".sheet-tabs",
+          contentSelector: ".sheet-body",
+          initial: "description",
         },
       ],
     });
@@ -26,7 +27,7 @@ export class LadyBlackbirdItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = 'systems/lady-blackbird/templates/item';
+    const path = "systems/lady-blackbird/templates/item";
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.hbs`;
 
@@ -86,7 +87,7 @@ export class LadyBlackbirdItemSheet extends ItemSheet {
     // Roll handlers, click handlers, etc. would go here.
 
     // Active Effect management
-    html.on('click', '.effect-control', (ev) =>
+    html.on("click", ".effect-control", (ev) =>
       onManageActiveEffect(ev, this.item)
     );
   }

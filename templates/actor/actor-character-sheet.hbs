@@ -1,108 +1,126 @@
-<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
+<form
+  class="{{cssClass}} {{actor.type}} overflow-auto bg-white"
+  autocomplete="off"
+>
 
-  {{!-- Sheet Header --}}
-  <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-    <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"/></h1>
-      {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-      use both the "grid" and "grid-Ncol" class where "N" can be any number
-      from 1 to 12 and will create that number of columns.  --}}
-      <div class="resources grid grid-3col">
+  <div class="max-w-4xl mx-auto p-6">
+    <div class="border-4 border-black border-double">
+      <h1 class="text-4xl font-bold text-center mb-2">Kale Arkham</h1>
+      <p class="text-center italic mb-6">A burglar and petty sorcerer, first
+        mate and mechanic of The Owl</p>
 
-        {{!-- "flex-group-center" is also defined in the _grid.scss file
-        and it will add a small amount of padding, a border, and will
-        center all of its child elements content and text. --}}
-        <div class="resource flex-group-center">
-          <label for="system.health.value" class="resource-label">Health</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
-          <span> / </span>
-          <input type="text" name="system.health.max" value="{{system.health.max}}" data-dtype="Number"/>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <!-- Traits & Tags -->
+        <div class="md:col-span-2">
+          <div class="bg-black w-full flex justify-center items-center">
+            <h2
+              class="text-xl text-white font-semibold uppercase text-center m-0"
+            >Traits & Tags</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 border-y">
+            <div class="border-x">
+              <div class="border-b px-4 py-2">
+                <h4 class="font-semibold m-0">Burglar</h4>
+              </div>
+              <div class="px-4 py-2">
+                <p class="italic">Quiet</p>
+                <p class="italic">Sneak</p>
+                <p class="italic">Dexterous</p>
+                <p class="italic">Locks</p>
+                <p class="italic">Perceptive</p>
+                <p class="italic">Traps</p>
+                <p class="italic">Darkness</p>
+                <p class="italic">Alarm</p>
+                <p class="italic">Distractions</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="resource flex-group-center">
-          <label for="system.power.value" class="resource-label">Power</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.power.value" value="{{system.power.value}}" data-dtype="Number"/>
-          <span> / </span>
-          <input type="text" name="system.power.max" value="{{system.power.max}}" data-dtype="Number"/>
+        <!-- Keys -->
+        <div>
+          <h2 class="text-xl font-semibold mb-2">Keys</h2>
+          <div class="text-sm mb-2">
+            <p class="font-semibold">Key of Greed</p>
+            <p>You like the shiny things. Turn this key when you steal something
+              cool or score a big payoff.</p>
+            <p class="italic">Buyoff: Swear off stealing forever.</p>
+          </div>
+          <div class="text-sm mb-2">
+            <p class="font-semibold">Key of the Mission</p>
+            <p>You must safely deliver Lady Blackbird to the Pirate King Uriah
+              Flint, so she can marry him. Turn this key when you take action to
+              complete the mission.</p>
+            <p class="italic">Buyoff: Give up the mission.</p>
+          </div>
+          <div class="text-sm mb-2">
+            <p class="font-semibold">Key of Fraternity</p>
+            <p>You are sworn to Captain Vance in a bond of brotherhood. Turn
+              this key when your character is influenced by Vance or when you
+              show how deep your bond is.</p>
+            <p class="italic">Buyoff: Sever the relationship.</p>
           </div>
         </div>
 
-        <div class="resource flex-group-center">
-          <label for="system.attributes.level.value" class="resource-label">Level</label>
-          <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.attributes.level.value" value="{{system.attributes.level.value}}" data-dtype="Number"/>
+        <!-- Secrets -->
+        <div>
+          <h2 class="text-xl font-semibold mb-2">Secrets</h2>
+          <div class="text-sm mb-2">
+            <p class="font-semibold">Secret of Concealment</p>
+            <p>No matter how thoroughly you're searched, you always have a few
+              key items with you. You can produce any common, simple item at a
+              moment's notice.</p>
+          </div>
+          <div class="text-sm mb-2">
+            <p class="font-semibold">Secret of Reflexes</p>
+            <p>Once per refresh, you can re-roll a failure when doing anything
+              involving grace, dexterity, or quick reflexes.</p>
           </div>
         </div>
+      </div>
 
+      <!-- Conditions, Pool, Items -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-semibold mb-2">Conditions</h2>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Injured</li>
+            <li>Dead (presumed)</li>
+            <li>Tired</li>
+            <li>Angry</li>
+            <li>Lost</li>
+            <li>Hunted</li>
+            <li>Trapped</li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-xl font-semibold mb-2">Pool</h2>
+          <p class="text-sm">Maximum: ●●●●●●●</p>
+          <p class="text-sm">Current: ●●●●●●●</p>
+        </div>
+        <div>
+          <h2 class="text-xl font-semibold mb-2">Items & Appearance</h2>
+          <p class="text-sm mb-1">Kale Arkham begins detained in the brig,
+            weaponless.</p>
+          <p class="text-sm">Items: Mechanic's garb and tools — Dagger — Lock
+            picks — Trick cards — Goggles</p>
+        </div>
+      </div>
+
+      <!-- XP -->
+      <div>
+        <h2 class="text-xl font-semibold mb-2">XP</h2>
+        <p class="text-sm mb-1">Spend XP at any time to:</p>
+        <ul class="list-disc list-inside text-sm space-y-1">
+          <li>5 XP — Add a new trait with 1–3 tags.</li>
+          <li>5 XP — Add a new key you’ve never had before.</li>
+          <li>5 XP — Add a new secret.</li>
+          <li>5 XP — Increase pool maximum by 1 (and get a pool die).</li>
+          <li>3 XP — Unlock a tag on an existing trait.</li>
+          <li>1 XP — Get a pool die (up to your pool maximum).</li>
+        </ul>
       </div>
     </div>
-  </header>
+  </div>
 
-  {{!-- Sheet Tab Navigation --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    {{!-- Default tab is specified in actor-sheet.mjs --}}
-    <a class="item" data-tab="features">Features</a>
-    <a class="item" data-tab="description">Description</a>
-    <a class="item" data-tab="items">Items</a>
-    <a class="item" data-tab="spells">Spells</a>
-    <a class="item" data-tab="effects">Effects</a>
-  </nav>
-
-  {{!-- Sheet Body --}}
-  <section class="sheet-body">
-
-    {{!-- Owned Features Tab --}}
-    <div class="tab features" data-group="primary" data-tab="features">
-      <section class="grid grid-3col">
-        <aside class="sidebar">
-
-          {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
-          use both the "grid" and "grid-Ncol" class where "N" can be any number
-          from 1 to 12 and will create that number of columns.  --}}
-          <div class="abilities flexcol">
-            {{#each system.abilities as |ability key|}}
-            <div class="ability flexrow flex-group-center">
-              <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll="d20+@abilities.{{key}}.mod" data-label="{{localize (lookup @root.config.abilities key)}}">{{localize (lookup @root.config.abilities key)}}</label>
-              <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
-              <span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{localize (lookup @root.config.abilities key)}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-            </div>
-            {{/each}}
-          </div>
-        </aside>
-
-        {{!-- For the main features list, span the right two columns --}}
-        <section class="main grid-span-2">
-          {{!-- This is a Handlebars partial. They're stored in the `/parts` folder next to this sheet, and defined in module/helpers/templates.mjs --}}
-          {{> "systems/lady-blackbird/templates/actor/parts/actor-features.hbs"}}
-        </section>
-
-      </section>
-    </div>
-
-    {{!-- Biography Tab --}}
-    <div class="tab biography" data-group="primary" data-tab="description">
-      {{!-- Editors must receive enriched text data from getData to properly handle rolls --}}
-      {{editor enrichedBiography target="system.biography" engine="prosemirror" button=true editable=editable}}
-    </div>
-
-    {{!-- Owned Items Tab --}}
-    <div class="tab items" data-group="primary" data-tab="items">
-       {{> "systems/lady-blackbird/templates/actor/parts/actor-items.hbs"}}
-    </div>
-
-    {{!-- Owned Spells Tab --}}
-    <div class="tab spells" data-group="primary" data-tab="spells">
-      {{> "systems/lady-blackbird/templates/actor/parts/actor-spells.hbs"}}
-    </div>
-
-    {{!-- Active Effects Tab --}}
-    <div class="tab effects flexcol" data-group="primary" data-tab="effects">
-      {{> "systems/lady-blackbird/templates/actor/parts/actor-effects.hbs"}}
-    </div>
-
-  </section>
 </form>

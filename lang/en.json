@@ -1,23 +1,23 @@
 {
   "LADY_BLACKBIRD": {
-    "Ability": {
-      "Str": { "long": "Strength", "abbr": "str" },
-      "Con": { "long": "Constitution", "abbr": "con" },
-      "Dex": { "long": "Dexterity", "abbr": "dex" },
-      "Int": { "long": "Intelligence", "abbr": "int" },
-      "Wis": { "long": "Wisdom", "abbr": "wis" },
-      "Cha": { "long": "Charisma", "abbr": "cha" }
-    },
     "SheetLabels": {
       "Actor": "LadyBlackbird Actor Sheet",
       "Item": "LadyBlackbird Item Sheet"
     },
-    "Item": {
-      "Spell": {
-        "SpellLVL": "Level {level} Spells",
-        "AddLVL": "Add LVL {level}"
-      }
+    "CharacterSheet": {
+      "Name": "Name",
+      "Description": "Description",
+      "Trait": "Trait",
+      "Traits": "Traits",
+      "Tag": "Tags",
+      "Tags": "Tags",
+      "Key": "Key",
+      "Keys": "Keys",
+      "Secret": "Secret",
+      "Secrets": "Secrets"
     },
+
+    "Item": {},
     "Effect": {
       "Source": "Source",
       "Toggle": "Toggle Effect",
@@ -29,8 +29,7 @@
 
   "TYPES": {
     "Actor": {
-      "character": "Character",
-      "npc": "NPC"
+      "character": "Character"
     },
     "Item": {
       "item": "Item",
