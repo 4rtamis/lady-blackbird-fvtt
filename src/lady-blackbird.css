@@ -1,6 +1,12 @@
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
+@import "./fonts.css";
+
+@theme {
+  --font-serif: "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+}
 
 .character-sheet .window-content {
   padding: 0;

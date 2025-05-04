@@ -1,26 +1,29 @@
 <form
-  class="{{cssClass}} {{actor.type}} overflow-auto bg-white"
+  class="{{cssClass}} {{actor.type}} overflow-auto bg-white font-serif"
   autocomplete="off"
 >
 
-  <div class="max-w-4xl mx-auto p-6">
-    <div class="border-4 border-black border-double">
-      <h1 class="text-4xl font-bold text-center mb-2">Kale Arkham</h1>
-      <p class="text-center italic mb-6">A burglar and petty sorcerer, first
-        mate and mechanic of The Owl</p>
+  <div class="mx-auto max-w-4xl p-6">
+    <div class="border-4 border-double border-black">
+      <h1
+        class="my-1 translate-y-px text-center font-serif text-4xl font-bold"
+        style="font-variant-caps: small-caps;"
+      >Kale Arkham</h1>
+      <p class="m-0 mb-2 text-center font-serif italic">A burglar and petty
+        sorcerer, first mate and mechanic of The Owl</p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div class="mb-6 grid grid-cols-1 md:grid-cols-2">
         <!-- Traits & Tags -->
         <div class="md:col-span-2">
-          <div class="bg-black w-full flex justify-center items-center">
+          <div class="flex w-full items-center justify-center bg-black">
             <h2
-              class="text-xl text-white font-semibold uppercase text-center m-0"
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
             >Traits & Tags</h2>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 border-y">
+          <div class="grid grid-cols-1 gap-4 border-y md:grid-cols-4">
             <div class="border-x">
               <div class="border-b px-4 py-2">
-                <h4 class="font-semibold m-0">Burglar</h4>
+                <h4 class="m-0 font-serif text-xl font-normal">Burglar</h4>
               </div>
               <div class="px-4 py-2">
                 <p class="italic">Quiet</p>
@@ -38,52 +41,160 @@
         </div>
 
         <!-- Keys -->
-        <div>
-          <h2 class="text-xl font-semibold mb-2">Keys</h2>
-          <div class="text-sm mb-2">
-            <p class="font-semibold">Key of Greed</p>
-            <p>You like the shiny things. Turn this key when you steal something
-              cool or score a big payoff.</p>
-            <p class="italic">Buyoff: Swear off stealing forever.</p>
+        <div class="border-r-1 border-black">
+          <div class="flex w-full items-center justify-center bg-black">
+            <h2
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+            >Keys</h2>
           </div>
-          <div class="text-sm mb-2">
-            <p class="font-semibold">Key of the Mission</p>
-            <p>You must safely deliver Lady Blackbird to the Pirate King Uriah
-              Flint, so she can marry him. Turn this key when you take action to
-              complete the mission.</p>
-            <p class="italic">Buyoff: Give up the mission.</p>
-          </div>
-          <div class="text-sm mb-2">
-            <p class="font-semibold">Key of Fraternity</p>
-            <p>You are sworn to Captain Vance in a bond of brotherhood. Turn
-              this key when your character is influenced by Vance or when you
-              show how deep your bond is.</p>
-            <p class="italic">Buyoff: Sever the relationship.</p>
+
+          <div class="space-y-4 px-4 py-4">
+            <div class="key">
+              <div class="mb-2 overflow-hidden">
+                <div class="relative border-2 border-black">
+                  <i
+                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <p class="px-3 text-lg leading-4 font-semibold">Key of Greed</p>
+                  <i
+                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                </div>
+              </div>
+
+              <p class="m-0">You like the shiny things. Turn this key when you
+                steal something cool or score a big payoff.</p>
+              <p class="m-0 italic">Buyoff: Swear off stealing forever.</p>
+            </div>
+
+            <div class="key">
+              <div class="mb-2 overflow-hidden">
+                <div class="relative border-2 border-black">
+                  <i
+                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <p class="px-3 text-lg leading-4 font-semibold">Key of the
+                    Mission</p>
+                  <i
+                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                </div>
+              </div>
+
+              <p class="m-0">You must safely deliver Lady Blackbird to the
+                Pirate King Uriah Flint, so she can marry him. Turn this key
+                when you take action to complete the mission.</p>
+              <p class="m-0 italic">Buyoff: Give up the mission.</p>
+            </div>
+
+            <div class="key">
+              <div class="mb-2 overflow-hidden">
+                <div class="relative border-2 border-black">
+                  <i
+                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <p class="px-3 text-lg leading-4 font-semibold">Key of
+                    Fraternity</p>
+                  <i
+                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                </div>
+              </div>
+
+              <p class="m-0">You are sworn to Captain Vance in a bond of
+                brotherhood. Turn this key when your character is influenced by
+                Vance or when you show how deep your bond is.</p>
+              <p class="m-0 italic">Buyoff: Sever the relationship.</p>
+            </div>
+
           </div>
         </div>
 
         <!-- Secrets -->
         <div>
-          <h2 class="text-xl font-semibold mb-2">Secrets</h2>
-          <div class="text-sm mb-2">
-            <p class="font-semibold">Secret of Concealment</p>
-            <p>No matter how thoroughly you're searched, you always have a few
-              key items with you. You can produce any common, simple item at a
-              moment's notice.</p>
+          <div class="flex w-full items-center justify-center bg-black">
+            <h2
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+            >Secrets</h2>
           </div>
-          <div class="text-sm mb-2">
-            <p class="font-semibold">Secret of Reflexes</p>
-            <p>Once per refresh, you can re-roll a failure when doing anything
-              involving grace, dexterity, or quick reflexes.</p>
+
+          <div class="space-y-4 px-4 py-4">
+            <div class="key">
+              <div class="mb-2 overflow-hidden">
+                <div class="relative border-2 border-black">
+                  <i
+                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <p class="px-3 text-lg leading-4 font-semibold">Secret of
+                    Concealment</p>
+                  <i
+                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                </div>
+              </div>
+
+              <p class="m-0">No matter how thoroughly you're searched, you
+                always have a few key items with you. You can produce any
+                common, simple item at a moment's notice.</p>
+            </div>
+
+            <div class="key">
+              <div class="mb-2 overflow-hidden">
+                <div class="relative border-2 border-black">
+                  <i
+                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <p class="px-3 text-lg leading-4 font-semibold">Secret of
+                    Reflexes</p>
+                  <i
+                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                  <i
+                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                  ></i>
+                </div>
+              </div>
+
+              <p class="m-0">Once per refresh, you can re-roll a failure when
+                doing anything involving grace, dexterity, or quick reflexes.</p>
+            </div>
           </div>
+
         </div>
       </div>
 
       <!-- Conditions, Pool, Items -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
         <div>
-          <h2 class="text-xl font-semibold mb-2">Conditions</h2>
-          <ul class="list-disc list-inside text-sm space-y-1">
+          <h2 class="mb-2 text-xl font-semibold">Conditions</h2>
+          <ul class="list-inside list-disc space-y-1 text-sm">
             <li>Injured</li>
             <li>Dead (presumed)</li>
             <li>Tired</li>
@@ -94,13 +205,13 @@
           </ul>
         </div>
         <div>
-          <h2 class="text-xl font-semibold mb-2">Pool</h2>
+          <h2 class="mb-2 text-xl font-semibold">Pool</h2>
           <p class="text-sm">Maximum: ●●●●●●●</p>
           <p class="text-sm">Current: ●●●●●●●</p>
         </div>
         <div>
-          <h2 class="text-xl font-semibold mb-2">Items & Appearance</h2>
-          <p class="text-sm mb-1">Kale Arkham begins detained in the brig,
+          <h2 class="mb-2 text-xl font-semibold">Items & Appearance</h2>
+          <p class="mb-1 text-sm">Kale Arkham begins detained in the brig,
             weaponless.</p>
           <p class="text-sm">Items: Mechanic's garb and tools — Dagger — Lock
             picks — Trick cards — Goggles</p>
@@ -109,9 +220,9 @@
 
       <!-- XP -->
       <div>
-        <h2 class="text-xl font-semibold mb-2">XP</h2>
-        <p class="text-sm mb-1">Spend XP at any time to:</p>
-        <ul class="list-disc list-inside text-sm space-y-1">
+        <h2 class="mb-2 text-xl font-semibold">XP</h2>
+        <p class="mb-1 text-sm">Spend XP at any time to:</p>
+        <ul class="list-inside list-disc space-y-1 text-sm">
           <li>5 XP — Add a new trait with 1–3 tags.</li>
           <li>5 XP — Add a new key you’ve never had before.</li>
           <li>5 XP — Add a new secret.</li>
