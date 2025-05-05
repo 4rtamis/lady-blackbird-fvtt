@@ -4,10 +4,19 @@
 @import "./fonts.css";
 
 @theme {
-  --font-serif: "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman",
-    Times, serif;
+  --font-serif:
+    "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 .character-sheet .window-content {
   padding: 0;
+}
+
+.victorian-ornaments {
+  border-image-slice: 310 310 310 310;
+  border-image-width: 42px 42px 42px 42px;
+  border-image-outset: 9px 9px 9px 9px;
+  border-image-repeat: round round;
+  border-image-source: url("../assets/corner-ornaments.svg");
+  border-style: solid;
 }

@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "CSS compiler for the Lady Blackbird system",
   "scripts": {
-    "watch": "npx @tailwindcss/cli -i ./src/lady-blackbird.css -o ./css/lady-blackbird.css --watch"
+    "watch": "npx @tailwindcss/cli -i ./src/lady-blackbird.css -o ./css/lady-blackbird.css --watch",
+    "createSymlinks": "node ./tools/create-symlinks.mjs"
   },
   "browserslist": [
     "last 3 versions"
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.5",
+    "js-yaml": "^4.1.0",
     "tailwindcss": "^4.1.5"
   }
 }

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "module": "ES2022",
+    "target": "ES2022",
+    "paths": {
+      "@client/*": ["./foundry/client/*"],
+      "@common/*": ["./foundry/common/*"]
+    }
+  },
+  "exclude": ["node_modules", "**/node_modules/*"],
+  "include": [
+    "module/lady-blackbird.mjs",
+    "foundry/client/client.mjs",
+    "foundry/client/global.d.mts",
+    "module/foundry.d.ts"
+  ],
+  "typeAcquisition": {
+    "include": ["jquery"]
+  }
+}

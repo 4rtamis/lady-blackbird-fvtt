@@ -1,2 +1,4 @@
 node_modules
 .direnv
+foundry-config.yaml
+foundry

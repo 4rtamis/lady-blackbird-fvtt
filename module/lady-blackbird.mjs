@@ -58,7 +58,7 @@ Hooks.once("init", function () {
   // Register sheet application classes
   foundry.documents.collections.Actors.unregisterSheet(
     "core",
-    foundry.applications.sheets.ActorSheetV2
+    foundry.applications.sheets.ActorSheetV2,
   );
   foundry.documents.collections.Actors.registerSheet(
     "lady-blackbird",
@@ -66,11 +66,11 @@ Hooks.once("init", function () {
     {
       makeDefault: true,
       label: "LADY_BLACKBIRD.SheetLabels.Actor",
-    }
+    },
   );
   foundry.documents.collections.Items.unregisterSheet(
     "core",
-    foundry.applications.sheets.ItemSheetV2
+    foundry.applications.sheets.ItemSheetV2,
   );
   foundry.documents.collections.Items.registerSheet(
     "lady-blackbird",
@@ -78,7 +78,7 @@ Hooks.once("init", function () {
     {
       makeDefault: true,
       label: "LADY_BLACKBIRD.SheetLabels.Item",
-    }
+    },
   );
 
   // Preload Handlebars templates.

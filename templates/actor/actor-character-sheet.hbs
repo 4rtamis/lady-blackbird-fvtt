@@ -4,7 +4,7 @@
 >
 
   <div class="mx-auto max-w-4xl p-6">
-    <div class="border-4 border-double border-black">
+    <div class="victorian-ornaments">
       <h1
         class="my-1 translate-y-px text-center font-serif text-4xl font-bold"
         style="font-variant-caps: small-caps;"
@@ -12,9 +12,9 @@
       <p class="m-0 mb-2 text-center font-serif italic">A burglar and petty
         sorcerer, first mate and mechanic of The Owl</p>
 
-      <div class="mb-6 grid grid-cols-1 md:grid-cols-2">
+      <div class="mb-6 grid grid-cols-1 md:grid-cols-6">
         <!-- Traits & Tags -->
-        <div class="md:col-span-2">
+        <div class="md:col-span-6">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
               class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
@@ -40,8 +40,240 @@
           </div>
         </div>
 
+        <!-- Conditions -->
+        <div class="border-r border-black md:col-span-3">
+          <div class="flex w-full items-center justify-center bg-black">
+            <h2
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+            >Conditions</h2>
+          </div>
+          <div>
+
+            <div class="flex flex-wrap">
+              <div
+                class="grid w-full grid-cols-3 items-center justify-around p-2"
+              >
+                <label class="mb-1 flex items-center before:hidden">
+                  <input
+                    type="checkbox"
+                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
+                  />
+                  Injured
+                </label>
+                <label class="mb-1 flex items-center before:hidden">
+                  <input
+                    type="checkbox"
+                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
+                  />
+                  Dead
+                </label>
+                <label class="mb-1 flex items-center before:hidden">
+                  <input
+                    type="checkbox"
+                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
+                  />
+                  Tired
+                </label>
+                <label class="mb-1 flex items-center before:hidden">
+                  <input
+                    type="checkbox"
+                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
+                  />
+                  Angry
+                </label>
+                <label class="mb-1 flex items-center before:hidden">
+                  <input
+                    type="checkbox"
+                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
+                  />
+                  Lost
+                </label>
+                <label class="mb-1 flex items-center before:hidden">
+                  <input
+                    type="checkbox"
+                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
+                  />
+                  Hunted
+                </label>
+                <label class="mb-1 flex items-center before:hidden">
+                  <input
+                    type="checkbox"
+                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
+                  />
+                  Trapped
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dice Pool -->
+        <div class="border-r border-black md:col-span-1">
+          <div class="flex w-full items-center justify-center bg-black">
+            <h2
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+            >Dice Pool</h2>
+          </div>
+
+          <div class="grid grid-cols-4 items-center justify-center p-2">
+            <input
+              type="checkbox"
+              id="die1"
+              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+            />
+            <input
+              type="checkbox"
+              id="die2"
+              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+            />
+            <input
+              type="checkbox"
+              id="die3"
+              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+            />
+            <input
+              type="checkbox"
+              id="die4"
+              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+            />
+            <input
+              type="checkbox"
+              id="die5"
+              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+            />
+            <input
+              type="checkbox"
+              id="die6"
+              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+            />
+
+          </div>
+
+        </div>
+
+        <!-- Experience -->
+        <div class="border-r border-black md:col-span-2">
+          <div class="flex w-full items-center justify-center bg-black">
+            <h2
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+            >Experience</h2>
+          </div>
+
+          <div class="flex flex-col items-center justify-start space-y-2 p-2">
+            <div class="grid grid-cols-5">
+              <input
+                type="checkbox"
+                id="xp1"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp2"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp3"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp4"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp5"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp6"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp7"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp8"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp9"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp10"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp11"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp12"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp13"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp14"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+              <input
+                type="checkbox"
+                id="xp15"
+                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
+              />
+            </div>
+            <div>
+              <p class="m-0 inline-block text-xs">Spend XP at any time on</p>
+              <div
+                class="group relative mb-0 inline-block border-t-0 border-r-0 border-b-1 border-l-0 border-dotted border-black text-xs hover:cursor-pointer"
+              >improvements
+                <div
+                  class="invisible absolute top-5 right-0 z-40 w-64 border border-black bg-white p-2 shadow-2xl group-hover:visible"
+                >
+                  <ul class="m-0 list-none space-y-1 p-0 text-xs *:m-0">
+                    <li><b>5 XP</b>
+                      — Add a new
+                      <b>trait</b>
+                      with 1-3 tags.</li>
+                    <li><b>5 XP</b>
+                      — Add a new
+                      <b>key</b>
+                      you've never had before.</li>
+                    <li><b>5 XP</b> — Add a new <b>secret</b>.</li>
+                    <li><b>5 XP</b> — Increase <b>pool maximum</b> by 1.</li>
+                    <li><b>3 XP</b>
+                      — Unlock a
+                      <b>tag</b>
+                      on an existing trait.</li>
+                    <li><b>1 XP</b>
+                      — Get a
+                      <b>pool die</b>
+                      (up to your pool maximum).</li>
+                  </ul>
+                </div>
+              </div>.
+            </div>
+          </div>
+
+        </div>
+
         <!-- Keys -->
-        <div class="border-r-1 border-black">
+        <div class="border-r-1 border-black md:col-span-3">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
               class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
@@ -129,7 +361,7 @@
         </div>
 
         <!-- Secrets -->
-        <div>
+        <div class="md:col-span-3">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
               class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
@@ -186,51 +418,24 @@
                 doing anything involving grace, dexterity, or quick reflexes.</p>
             </div>
           </div>
+        </div>
 
+        <!-- Items & Apparence-->
+        <div class="border-r border-black md:col-span-6">
+          <div class="flex w-full items-center justify-center bg-black">
+            <h2
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+            >Items & Appearance</h2>
+          </div>
+          <div class="p-2">
+            <p class="text-sm">Kale Arkham begins detained in the brig,
+              weaponless.</p>
+            <p class="text-sm">Items: Mechanic's garb and tools — Dagger — Lock
+              picks — Trick cards — Goggles</p>
+          </div>
         </div>
       </div>
 
-      <!-- Conditions, Pool, Items -->
-      <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div>
-          <h2 class="mb-2 text-xl font-semibold">Conditions</h2>
-          <ul class="list-inside list-disc space-y-1 text-sm">
-            <li>Injured</li>
-            <li>Dead (presumed)</li>
-            <li>Tired</li>
-            <li>Angry</li>
-            <li>Lost</li>
-            <li>Hunted</li>
-            <li>Trapped</li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="mb-2 text-xl font-semibold">Pool</h2>
-          <p class="text-sm">Maximum: ●●●●●●●</p>
-          <p class="text-sm">Current: ●●●●●●●</p>
-        </div>
-        <div>
-          <h2 class="mb-2 text-xl font-semibold">Items & Appearance</h2>
-          <p class="mb-1 text-sm">Kale Arkham begins detained in the brig,
-            weaponless.</p>
-          <p class="text-sm">Items: Mechanic's garb and tools — Dagger — Lock
-            picks — Trick cards — Goggles</p>
-        </div>
-      </div>
-
-      <!-- XP -->
-      <div>
-        <h2 class="mb-2 text-xl font-semibold">XP</h2>
-        <p class="mb-1 text-sm">Spend XP at any time to:</p>
-        <ul class="list-inside list-disc space-y-1 text-sm">
-          <li>5 XP — Add a new trait with 1–3 tags.</li>
-          <li>5 XP — Add a new key you’ve never had before.</li>
-          <li>5 XP — Add a new secret.</li>
-          <li>5 XP — Increase pool maximum by 1 (and get a pool die).</li>
-          <li>3 XP — Unlock a tag on an existing trait.</li>
-          <li>1 XP — Get a pool die (up to your pool maximum).</li>
-        </ul>
-      </div>
     </div>
   </div>
 
