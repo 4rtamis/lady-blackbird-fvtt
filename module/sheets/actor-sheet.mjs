@@ -3,24 +3,37 @@ import {
   prepareActiveEffectCategories,
 } from "../helpers/effects.mjs";
 
-const { ActorSheetV2 } = foundry.applications.sheets;
-const { HandlebarsApplicationMixin } = foundry.applications.api;
+const { sheets, api } = foundry.applications;
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheetV2}
  */
-export class LadyBlackbirdActorSheet extends HandlebarsApplicationMixin(
-  ActorSheetV2
+export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
+  sheets.ActorSheetV2,
 ) {
+  // Define the default options for the sheet
+  _editModeEnabled = false;
+
+  /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["character-sheet"],
+    tag: "form",
+    form: {
+      submitOnChange: true,
+      closeOnSubmit: false,
+    },
     position: {
       width: 800,
-      height: 800,
+      height: "auto",
     },
     window: {
       resizable: true,
+    },
+    actions: {
+      //editImage: this._onEditImage,
+      //onRoll: this._onRoll,
+      toggleEditMode: this._onToggleEditMode,
     },
   };
 
@@ -30,6 +43,17 @@ export class LadyBlackbirdActorSheet extends HandlebarsApplicationMixin(
         "systems/lady-blackbird/templates/actor/actor-character-sheet.hbs",
     },
   };
+
+  get system() {
+    return this.actor.system;
+  }
+
+  static async _onToggleEditMode(event, target) {
+    event.preventDefault();
+    this._editModeEnabled = !this._editModeEnabled;
+    await this.submit();
+    this.render();
+  }
 
   /* -------------------------------------------- */
 
@@ -43,6 +67,13 @@ export class LadyBlackbirdActorSheet extends HandlebarsApplicationMixin(
 
     // Use a safe clone of the actor data for further operations.
     const data = this.document.toObject(false);
+
+    const isEditable = this.isEditable;
+
+    context.cssClass = isEditable ? "editable" : "locked";
+    context.editable = isEditable;
+    context.editModeEnabled = this._editModeEnabled;
+    context.editModeDisabled = !this._editModeEnabled;
 
     context.document = this.document;
     context.data = data;
@@ -58,10 +89,16 @@ export class LadyBlackbirdActorSheet extends HandlebarsApplicationMixin(
     context.systemFields = this.document.system.schema.fields;
     context.system = this.system;
 
+    console.log("context", context);
+
     return context;
   }
 
   /* -------------------------------------------- */
+
+  async _onFirstRender(context, options) {
+    await super._onFirstRender(context, options);
+  }
 
   /** @override */
   _onRender(context, options) {

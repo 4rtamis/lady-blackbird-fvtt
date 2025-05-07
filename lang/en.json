@@ -6,7 +6,10 @@
     },
     "CharacterSheet": {
       "Name": "Name",
-      "Description": "Description",
+      "Description": {
+        "Name": "Description",
+        "Hint": "A short description of your character."
+      },
       "Trait": "Trait",
       "Traits": "Traits",
       "Tag": "Tags",

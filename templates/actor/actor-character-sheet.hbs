@@ -1,16 +1,45 @@
-<form
+<div
   class="{{cssClass}} {{actor.type}} overflow-auto bg-white font-serif"
   autocomplete="off"
 >
+  <a class="sheet-header-control" data-action="toggleEditMode">
+    {{#if editModeEnabled}}
+      <i
+        class="fa-solid fa-lock-open"
+        data-tooltip="DNM.Tooltips.Sheet.LockSheet"
+      ></i>
+    {{else}}
+      <i
+        class="fa-solid fa-lock"
+        data-tooltip="DNM.Tooltips.Sheet.UnlockSheet"
+      ></i>
+    {{/if}}
+  </a>
 
   <div class="mx-auto max-w-4xl p-6">
     <div class="victorian-ornaments">
       <h1
         class="my-1 translate-y-px text-center font-serif text-4xl font-bold"
         style="font-variant-caps: small-caps;"
-      >Kale Arkham</h1>
-      <p class="m-0 mb-2 text-center font-serif italic">A burglar and petty
-        sorcerer, first mate and mechanic of The Owl</p>
+      >
+        <input
+          class="text-center text-4xl"
+          name="name"
+          type="text"
+          value="{{actor.name}}"
+          placeholder="Name"
+          {{disabled editModeDisabled}}
+        />
+      </h1>
+
+      <input
+        class="m-0 mb-2 w-full px-2 text-center font-serif text-base italic"
+        name="system.description"
+        type="text"
+        value="{{system.description}}"
+        placeholder="A short description of the character"
+        {{disabled editModeDisabled}}
+      />
 
       <div class="mb-6 grid grid-cols-1 md:grid-cols-6">
         <!-- Traits & Tags -->
@@ -435,4 +464,4 @@
     </div>
   </div>
 
-</form>
+</div>

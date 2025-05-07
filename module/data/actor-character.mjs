@@ -26,9 +26,9 @@ export default class LadyBlackbirdCharacter extends LadyBlackbirdActorBase {
               required: false,
               blank: true,
             }),
-          })
+          }),
         ),
-      })
+      }),
     );
 
     return schema;

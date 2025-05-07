@@ -12,6 +12,13 @@
   padding: 0;
 }
 
+.character-sheet input[type="text"] {
+  background: unset;
+  border: unset;
+  border-radius: unset;
+  outline: unset;
+}
+
 .victorian-ornaments {
   border-image-slice: 310 310 310 310;
   border-image-width: 42px 42px 42px 42px;
