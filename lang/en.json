@@ -11,10 +11,18 @@
       "Traits": "Traits",
       "Tag": "Tags",
       "Tags": "Tags",
+      "Conditions": "Conditions",
+      "DicePool": "Dice Pool",
+      "Experience": "Experience",
+      "ExperienceTip": "Spend XP at any time on",
+      "Improvements": "Improvements",
+      "BuyingImprovements": "<li><b>5 XP</b> — Add a new <b>trait</b> with 1-3 tags.</li><li><b>5 XP</b> — Add a new <b>key</b> you've never had before.</li><li><b>5 XP</b> — Add a new <b>secret</b>.</li><li><b>5 XP</b> — Increase <b>pool maximum</b> by 1.</li><li><b>3 XP</b> — Unlock a <b>tag</b> on an existing trait.</li><li><b>1 XP</b> — Get a <b>pool die</b> (up to your pool maximum).</li>",
       "Key": "Key",
       "Keys": "Keys",
       "Secret": "Secret",
-      "Secrets": "Secrets"
+      "Secrets": "Secrets",
+      "Items": "Items",
+      "Appearance": "Appearance"
     },
 
     "Item": {},
