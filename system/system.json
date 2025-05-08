@@ -16,8 +16,8 @@
   "media": [
     {
       "type": "setup",
-      "url": "systems/lady-blackbird/assets/lady-blackbird-thumbnail.png",
-      "thumbnail": "systems/lady-blackbird/assets/lady-blackbird-thumbnail.png"
+      "url": "systems/lady-blackbird/assets/images/lady-blackbird-thumbnail.png",
+      "thumbnail": "systems/lady-blackbird/assets/images/lady-blackbird-thumbnail.png"
     }
   ],
   "version": "0.0.1",
@@ -25,21 +25,21 @@
     "minimum": 13,
     "verified": "13.431"
   },
-  "esmodules": ["module/lady-blackbird.mjs"],
-  "styles": ["css/lady-blackbird.css"],
+  "esmodules": ["lady-blackbird.mjs"],
+  "styles": ["./css/lady-blackbird.css"],
   "languages": [
     {
       "lang": "en",
       "name": "English",
-      "path": "lang/en.json"
+      "path": "./i18n/en.json"
     }
   ],
   "packs": [],
   "packFolders": [],
   "socket": false,
-  "manifest": "https://raw.githubusercontent.com/4rtamis/lady-blackbird-fvtt/main/system.json",
+  "manifest": "https://raw.githubusercontent.com/4rtamis/lady-blackbird-fvtt/main/system/system.json",
   "download": "TODO",
-  "background": "systems/lady-blackbird/assets/lady-blackbird-thumbnail.png",
+  "background": "systems/lady-blackbird/assets/images/lady-blackbird-thumbnail.png",
   "grid": {
     "distance": 5,
     "units": "ft"

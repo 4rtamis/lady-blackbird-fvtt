@@ -1,14 +1,14 @@
 // Import document classes.
-import { LadyBlackbirdActor } from "./documents/actor.mjs";
-import { LadyBlackbirdItem } from "./documents/item.mjs";
+import { LadyBlackbirdActor } from "./src/documents/actor.mjs";
+import { LadyBlackbirdItem } from "./src/documents/item.mjs";
 // Import sheet classes.
-import { LadyBlackbirdActorSheet } from "./sheets/actor-sheet.mjs";
-import { LadyBlackbirdItemSheet } from "./sheets/item-sheet.mjs";
+import { LadyBlackbirdActorSheet } from "./src/sheets/actor-sheet.mjs";
+import { LadyBlackbirdItemSheet } from "./src/sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
-import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
-import { LADY_BLACKBIRD } from "./helpers/config.mjs";
+import { preloadHandlebarsTemplates } from "./src/helpers/templates.mjs";
+import { LADY_BLACKBIRD } from "./src/helpers/config.mjs";
 // Import DataModel classes
-import * as models from "./data/_module.mjs";
+import * as models from "./src/data/_module.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */

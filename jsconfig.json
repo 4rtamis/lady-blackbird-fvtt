@@ -9,10 +9,10 @@
   },
   "exclude": ["node_modules", "**/node_modules/*"],
   "include": [
-    "module/lady-blackbird.mjs",
+    "system/lady-blackbird.mjs",
     "foundry/client/client.mjs",
     "foundry/client/global.d.mts",
-    "module/foundry.d.ts"
+    "system/foundry.d.ts"
   ],
   "typeAcquisition": {
     "include": ["jquery"]

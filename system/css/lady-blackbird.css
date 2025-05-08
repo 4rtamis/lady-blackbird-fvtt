@@ -511,7 +511,7 @@
   border-image-width: 42px 42px 42px 42px;
   border-image-outset: 9px 9px 9px 9px;
   border-image-repeat: round round;
-  border-image-source: url("../assets/corner-ornaments.svg");
+  border-image-source: url("../assets/images/corner-ornaments.svg");
   border-style: solid;
 }
 @property --tw-translate-x {

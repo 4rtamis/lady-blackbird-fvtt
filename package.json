@@ -1,26 +1,20 @@
 {
-  "name": "lady-blackbird",
+  "name": "lady-blackbird-fvtt",
   "version": "0.0.1",
-  "description": "CSS compiler for the Lady Blackbird system",
-  "scripts": {
-    "watch": "npx @tailwindcss/cli -i ./src/lady-blackbird.css -o ./css/lady-blackbird.css --watch",
-    "createSymlinks": "node ./tools/create-symlinks.mjs"
-  },
-  "browserslist": [
-    "last 3 versions"
-  ],
-  "author": "Artamis",
+  "description": "Development Tools for the Lady Blackbird Foundry VTT system",
   "license": "CC-BY-NC-SA-4.0",
-  "private": true,
+  "author": "Artamis",
+  "scripts": {
+    "createSymlinks": "node ./tools/create-symlinks.mjs",
+    "watch": "npx @tailwindcss/cli -i ./style/lady-blackbird.css -o ./system/css/lady-blackbird.css --watch"
+  },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.1.5",
     "fvtt-types": "github:League-of-Foundry-Developers/foundry-vtt-types#main",
+    "js-yaml": "^4.1.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "sass": "^1.53.0"
-  },
-  "dependencies": {
-    "@tailwindcss/cli": "^4.1.5",
-    "js-yaml": "^4.1.0",
+    "sass": "^1.53.0",
     "tailwindcss": "^4.1.5"
   }
 }
