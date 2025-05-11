@@ -1,5 +1,5 @@
 <div
-  class="{{cssClass}} {{item.type}} overflow-auto bg-white font-serif"
+  class="{{cssClass}} {{item.type}} overflow-auto font-serif"
   autocomplete="off"
 >
   <a class="sheet-header-control" data-action="toggleEditMode">
@@ -16,49 +16,89 @@
     {{/if}}
   </a>
 
-  {{log "item" item}}
-
-  <div class="mx-auto max-w-4xl p-6">
-    <div class="victorian-ornaments">
-      <h1
-        class="my-1 translate-y-px text-center font-serif text-4xl font-bold"
-        style="font-variant-caps: small-caps;"
-      >
+  <div class="">
+    <h1 class="">
+      {{#if editModeEnabled}}
         <input
-          class="text-center text-4xl"
-          name="name"
           type="text"
+          name="name"
           value="{{item.name}}"
-          placeholder="Name of the trait"
-          {{disabled editModeDisabled}}
+          placeholder="Trait Name"
         />
-      </h1>
+      {{else}}
+        {{item.name}}
+      {{/if}}
+    </h1>
+    {{#if @root.editModeEnabled}}
+      {{#each system.tags as |tag key|}}
+        <div class="flex flex-row items-center justify-start">
+          <input
+            type="text"
+            name="system.tags.{{key}}.name"
+            value="{{tag.name}}"
+            placeholder="Tag"
+          />
+          {{numberInput
+            tag.power
+            name=(concat "system.tags." key ".power")
+            step=1
+            min=0
+            max=3
+          }}
+          <input
+            type="text"
+            name="system.tags.{{key}}.group"
+            value="{{tag.group}}"
+            placeholder="Group"
+          />
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="flex flex-col items-start justify-start">
 
-      <input
-        class="m-0 mb-2 w-full px-2 text-center font-serif text-base italic"
-        name="system.description"
-        type="text"
-        value="{{system.description}}"
-        placeholder="A short description of the trait"
-        {{disabled editModeDisabled}}
-      />
+        {{! Ungrouped Tags }}
+        {{#each system.sortedTags.ungrouped as |tag|}}
+          <div class="mb-1 flex flex-row items-center justify-start">
+            {{#if tag.power}}
+              {{#times tag.power}}
+                <div class="mr-1 h-3 w-3 rounded-full bg-black"></div>
+              {{/times}}
+            {{else}}
+              <div class="mr-1 h-3 w-3 rounded-full border border-black"></div>
+            {{/if}}
+            <p class="text-base italic">{{tag.name}}</p>
+          </div>
+        {{/each}}
 
-      <div class="border-b px-4 py-2">
-        <h4 class="m-0 font-serif text-xl font-normal">Burglar</h4>
+        {{! Grouped Tags }}
+        {{#each system.sortedTags.grouped as |tags groupName|}}
+          <div class="mb-2 rounded-md border border-black p-2">
+            <div class="mb-1 border-b border-black pb-1 text-xs font-bold">Pick
+              one tag per roll</div>
+            {{#each tags as |tag|}}
+              <div class="mb-1 flex flex-row items-center justify-start">
+                {{#if tag.power}}
+                  {{#times tag.power}}
+                    <div class="mr-1 h-3 w-3 rounded-full bg-black"></div>
+                  {{/times}}
+                {{else}}
+                  <div
+                    class="mr-1 h-3 w-3 rounded-full border border-black"
+                  ></div>
+                {{/if}}
+                <p class="text-base italic">{{tag.name}}</p>
+              </div>
+            {{/each}}
+          </div>
+        {{/each}}
       </div>
-      <div class="px-4 py-2">
-        <p class="italic">Quiet</p>
-        <p class="italic">Sneak</p>
-        <p class="italic">Dexterous</p>
-        <p class="italic">Locks</p>
-        <p class="italic">Perceptive</p>
-        <p class="italic">Traps</p>
-        <p class="italic">Darkness</p>
-        <p class="italic">Alarm</p>
-        <p class="italic">Distractions</p>
-      </div>
+    {{/if}}
 
-    </div>
+    {{#if editModeEnabled}}
+      <button class="tag" data-action="addTag">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    {{/if}}
   </div>
 
 </div>

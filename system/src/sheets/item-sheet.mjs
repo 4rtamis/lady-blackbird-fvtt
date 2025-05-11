@@ -13,8 +13,9 @@ export class LadyBlackbirdItemSheet extends api.HandlebarsApplicationMixin(
   static DEFAULT_OPTIONS = {
     actions: {
       toggleEditMode: LadyBlackbirdItemSheet._onToggleEditMode,
+      addTag: LadyBlackbirdItemSheet._onAddTag,
     },
-    classes: ["lady-blackbird", "sheet", "item-sheet"],
+    classes: ["NOlady-blackbird", "sheet", "item-sheet"],
     form: {
       closeOnSubmit: false,
       submitOnChange: true,
@@ -41,6 +42,19 @@ export class LadyBlackbirdItemSheet extends api.HandlebarsApplicationMixin(
     this._editModeEnabled = !this._editModeEnabled;
     await this.submit();
     this.render();
+  }
+
+  static async _onAddTag(event, target) {
+    event.preventDefault();
+    const tags = this.system.tags ?? [];
+    tags.push({
+      name: "New Tag",
+      group: "",
+      power: 1,
+    });
+
+    this.item.update({ "system.tags": tags });
+    //this.render();
   }
 
   async _prepareContext(options = {}) {

@@ -20,12 +20,42 @@ export default class LadyBlackbirdFeature extends LadyBlackbirdItemBase {
           nullable: false,
           initial: 0,
           min: 0,
-          max: 10,
+          max: 3,
           integer: true,
         }),
       }),
     );
 
     return schema;
+  }
+
+  prepareDerivedData() {
+    super.prepareDerivedData();
+
+    const sortedTags = this.tags.sort((a, b) => {
+      if (!a.group && b.group) return -1;
+      if (a.group && !b.group) return 1;
+      if (a.group === b.group) return 0;
+      return a.group.localeCompare(b.group);
+    });
+
+    // Group tags
+    const groupedTags = {};
+    const ungroupedTags = [];
+
+    sortedTags.forEach((tag) => {
+      if (tag.group) {
+        if (!groupedTags[tag.group]) groupedTags[tag.group] = [];
+        groupedTags[tag.group].push(tag);
+      } else {
+        ungroupedTags.push(tag);
+      }
+    });
+
+    // Structure passed to Handlebars
+    this.sortedTags = {
+      ungrouped: ungroupedTags,
+      grouped: groupedTags,
+    };
   }
 }
