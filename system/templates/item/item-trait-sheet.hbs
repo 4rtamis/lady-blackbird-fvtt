@@ -51,6 +51,9 @@
             value="{{tag.group}}"
             placeholder="Group"
           />
+          <button class="tag" data-action="removeTag" data-tag="{{key}}">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
       {{/each}}
     {{else}}

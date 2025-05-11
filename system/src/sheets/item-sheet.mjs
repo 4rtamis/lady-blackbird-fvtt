@@ -14,6 +14,7 @@ export class LadyBlackbirdItemSheet extends api.HandlebarsApplicationMixin(
     actions: {
       toggleEditMode: LadyBlackbirdItemSheet._onToggleEditMode,
       addTag: LadyBlackbirdItemSheet._onAddTag,
+      removeTag: LadyBlackbirdItemSheet._onRemoveTag,
     },
     classes: ["NOlady-blackbird", "sheet", "item-sheet"],
     form: {
@@ -54,7 +55,15 @@ export class LadyBlackbirdItemSheet extends api.HandlebarsApplicationMixin(
     });
 
     this.item.update({ "system.tags": tags });
-    //this.render();
+  }
+
+  static async _onRemoveTag(event, target) {
+    event.preventDefault();
+    const tagIndex = Number(target.dataset.tag);
+    const tags = this.system.tags ?? [];
+    tags.splice(tagIndex, 1);
+
+    this.item.update({ "system.tags": tags });
   }
 
   async _prepareContext(options = {}) {

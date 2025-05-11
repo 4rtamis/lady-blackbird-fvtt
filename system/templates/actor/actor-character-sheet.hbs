@@ -16,6 +16,13 @@
     {{/if}}
   </a>
 
+  <button data-action="onRoll" class="sheet-header-control" data-formula="1d20">
+    <i
+      class="fa-solid fa-dice-d20"
+      data-tooltip="DNM.Tooltips.Sheet.RollDice"
+    ></i>
+  </button>
+
   <div class="mx-auto max-w-4xl p-6">
     <div class="victorian-ornaments">
       <h1
@@ -46,7 +53,7 @@
         <div class="md:col-span-6">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
             >{{localize "LADY_BLACKBIRD.CharacterSheet.Traits"}}
               &
               {{localize "LADY_BLACKBIRD.CharacterSheet.Tags"}}</h2>
@@ -75,7 +82,7 @@
         <div class="border-r border-black md:col-span-3">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
             >{{localize "LADY_BLACKBIRD.CharacterSheet.Conditions"}}</h2>
           </div>
           <div>
@@ -142,7 +149,7 @@
         <div class="border-r border-black md:col-span-1">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
             >{{localize "LADY_BLACKBIRD.CharacterSheet.DicePool"}}</h2>
           </div>
 
@@ -186,7 +193,7 @@
         <div class="border-r border-black md:col-span-2">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
             >{{localize "LADY_BLACKBIRD.CharacterSheet.Experience"}}</h2>
           </div>
 
@@ -273,13 +280,13 @@
                 {{localize "LADY_BLACKBIRD.CharacterSheet.ExperienceTip"}}
               </p>
               <div
-                class="group relative mb-0 inline-block border-t-0 border-r-0 border-b-1 border-l-0 border-dotted border-black text-xs hover:cursor-pointer"
+                class="border-b-1 group relative mb-0 inline-block border-l-0 border-r-0 border-t-0 border-dotted border-black text-xs hover:cursor-pointer"
               >
                 {{toLowerCase
                   (localize "LADY_BLACKBIRD.CharacterSheet.Improvements")
                 }}
                 <div
-                  class="invisible absolute top-5 right-0 z-40 w-64 border border-black bg-white p-2 shadow-2xl group-hover:visible"
+                  class="invisible absolute right-0 top-5 z-40 w-64 border border-black bg-white p-2 shadow-2xl group-hover:visible"
                 >
                   <ul class="m-0 list-none space-y-1 p-0 text-xs *:m-0">
                     {{{localize
@@ -297,7 +304,7 @@
         <div class="border-r-1 border-black md:col-span-3">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
             >{{localize "LADY_BLACKBIRD.CharacterSheet.Keys"}}</h2>
           </div>
 
@@ -306,14 +313,14 @@
               <div class="mb-2 overflow-hidden">
                 <div class="relative border-2 border-black">
                   <i
-                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
-                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
-                  <p class="px-3 text-lg leading-4 font-semibold">Key of Greed</p>
+                  <p class="px-3 text-lg font-semibold leading-4">Key of Greed</p>
                   <i
-                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
                     class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
@@ -330,15 +337,15 @@
               <div class="mb-2 overflow-hidden">
                 <div class="relative border-2 border-black">
                   <i
-                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
-                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
-                  <p class="px-3 text-lg leading-4 font-semibold">Key of the
+                  <p class="px-3 text-lg font-semibold leading-4">Key of the
                     Mission</p>
                   <i
-                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
                     class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
@@ -356,15 +363,15 @@
               <div class="mb-2 overflow-hidden">
                 <div class="relative border-2 border-black">
                   <i
-                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
-                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
-                  <p class="px-3 text-lg leading-4 font-semibold">Key of
+                  <p class="px-3 text-lg font-semibold leading-4">Key of
                     Fraternity</p>
                   <i
-                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
                     class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
@@ -385,7 +392,7 @@
         <div class="md:col-span-3">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
             >{{localize "LADY_BLACKBIRD.CharacterSheet.Secrets"}}</h2>
           </div>
 
@@ -394,15 +401,15 @@
               <div class="mb-2 overflow-hidden">
                 <div class="relative border-2 border-black">
                   <i
-                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
-                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
-                  <p class="px-3 text-lg leading-4 font-semibold">Secret of
+                  <p class="px-3 text-lg font-semibold leading-4">Secret of
                     Concealment</p>
                   <i
-                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
                     class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
@@ -419,15 +426,15 @@
               <div class="mb-2 overflow-hidden">
                 <div class="relative border-2 border-black">
                   <i
-                    class="absolute top-0 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
-                    class="absolute top-0 right-0 -mt-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
-                  <p class="px-3 text-lg leading-4 font-semibold">Secret of
+                  <p class="px-3 text-lg font-semibold leading-4">Secret of
                     Reflexes</p>
                   <i
-                    class="absolute right-0 bottom-0 -mr-2 -mb-2 h-4 w-4 rounded-full border-2 border-black bg-white"
+                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
                   ></i>
                   <i
                     class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
@@ -445,7 +452,7 @@
         <div class="border-r border-black md:col-span-6">
           <div class="flex w-full items-center justify-center bg-black">
             <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold text-white uppercase"
+              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
             >
               {{localize "LADY_BLACKBIRD.CharacterSheet.Items"}}
               &

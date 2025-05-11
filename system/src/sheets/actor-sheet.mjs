@@ -27,7 +27,7 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     },
     actions: {
       //editImage: this._onEditImage,
-      //onRoll: this._onRoll,
+      onRoll: this._onRoll,
       toggleEditMode: this._onToggleEditMode,
     },
   };
@@ -48,6 +48,17 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     this._editModeEnabled = !this._editModeEnabled;
     await this.submit();
     this.render();
+  }
+
+  static async _onRoll(event, target) {
+    event.preventDefault();
+    const formula = target.dataset.formula;
+    const roll = new foundry.dice.Roll(formula);
+    await roll.evaluate();
+    roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: `${this.actor.name} rolls ${formula}`,
+    });
   }
 
   /* -------------------------------------------- */
@@ -83,8 +94,6 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     context.systemSource = this.actor.system._source;
     context.systemFields = this.document.system.schema.fields;
     context.system = this.system;
-
-    console.log("context", context);
 
     return context;
   }
