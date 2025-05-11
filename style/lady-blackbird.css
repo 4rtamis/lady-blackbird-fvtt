@@ -8,11 +8,11 @@
     "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
-.character-sheet .window-content {
+.lady-blackbird.sheet .window-content {
   padding: 0;
 }
 
-.character-sheet input[type="text"] {
+.lady-blackbird.sheet input[type="text"] {
   background: unset;
   border: unset;
   border-radius: unset;

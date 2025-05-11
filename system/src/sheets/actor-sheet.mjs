@@ -1,8 +1,3 @@
-import {
-  onManageActiveEffect,
-  prepareActiveEffectCategories,
-} from "../helpers/effects.mjs";
-
 const { sheets, api } = foundry.applications;
 
 /**
@@ -17,7 +12,7 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
 
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["character-sheet"],
+    classes: ["lady-blackbird", "sheet", "character-sheet"],
     tag: "form",
     form: {
       submitOnChange: true,

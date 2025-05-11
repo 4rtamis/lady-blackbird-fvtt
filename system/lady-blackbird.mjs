@@ -25,17 +25,9 @@ Hooks.once("init", function () {
   // Add custom constants for configuration.
   CONFIG.LADY_BLACKBIRD = LADY_BLACKBIRD;
 
-  /**
-   * Set an initiative formula for the system
-   * @type {String}
-   */
-  CONFIG.Combat.initiative = {
-    formula: "1d20 + @abilities.dex.mod",
-    decimals: 2,
-  };
-
   // Define custom Document and DataModel classes
   CONFIG.Actor.documentClass = LadyBlackbirdActor;
+  CONFIG.Item.documentClass = LadyBlackbirdItem;
 
   // Note that you don't need to declare a DataModel
   // for the base actor/item classes - they are included
@@ -43,17 +35,9 @@ Hooks.once("init", function () {
   CONFIG.Actor.dataModels = {
     character: models.LadyBlackbirdCharacter,
   };
-  CONFIG.Item.documentClass = LadyBlackbirdItem;
   CONFIG.Item.dataModels = {
-    item: models.LadyBlackbirdItem,
-    feature: models.LadyBlackbirdFeature,
-    spell: models.LadyBlackbirdSpell,
+    trait: models.LadyBlackbirdTrait,
   };
-
-  // Active Effects are never copied to the Actor,
-  // but will still apply to the Actor from within the Item
-  // if the transfer property on the Active Effect is true.
-  CONFIG.ActiveEffect.legacyTransferral = false;
 
   // Register sheet application classes
   foundry.documents.collections.Actors.unregisterSheet(
@@ -68,6 +52,7 @@ Hooks.once("init", function () {
       label: "LADY_BLACKBIRD.SheetLabels.Actor",
     },
   );
+
   foundry.documents.collections.Items.unregisterSheet(
     "core",
     foundry.applications.sheets.ItemSheetV2,

@@ -103,9 +103,6 @@
   .grid {
     display: grid;
   }
-  .inline {
-    display: inline;
-  }
   .inline-block {
     display: inline-block;
   }
@@ -497,10 +494,10 @@
   font-weight: 800;
   src: url("../assets/fonts/EB_Garamond/eb-garamond-v30-latin-800italic.woff2") format("woff2");
 }
-.character-sheet .window-content {
+.lady-blackbird.sheet .window-content {
   padding: 0;
 }
-.character-sheet input[type="text"] {
+.lady-blackbird.sheet input[type="text"] {
   background: unset;
   border: unset;
   border-radius: unset;

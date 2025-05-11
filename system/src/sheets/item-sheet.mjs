@@ -1,94 +1,69 @@
-import {
-  onManageActiveEffect,
-  prepareActiveEffectCategories,
-} from "../helpers/effects.mjs";
+const { api, sheets } = foundry.applications;
 
-/**
- * Extend the basic ItemSheet with some very simple modifications
- * @extends {ItemSheet}
- */
-export class LadyBlackbirdItemSheet extends foundry.applications.sheets
-  .ItemSheetV2 {
-  /** @override */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["lady-blackbird", "sheet", "item"],
-      width: 520,
-      height: 480,
-      tabs: [
-        {
-          navSelector: ".sheet-tabs",
-          contentSelector: ".sheet-body",
-          initial: "description",
-        },
-      ],
-    });
+export class LadyBlackbirdItemSheet extends api.HandlebarsApplicationMixin(
+  sheets.ItemSheetV2,
+) {
+  _editModeEnabled = false;
+
+  get system() {
+    return this.item.system;
   }
 
   /** @override */
-  get template() {
-    const path = "systems/lady-blackbird/templates/item";
-    // Return a single sheet for all item types.
-    // return `${path}/item-sheet.hbs`;
+  static DEFAULT_OPTIONS = {
+    actions: {
+      toggleEditMode: LadyBlackbirdItemSheet._onToggleEditMode,
+    },
+    classes: ["lady-blackbird", "sheet", "item-sheet"],
+    form: {
+      closeOnSubmit: false,
+      submitOnChange: true,
+    },
+    position: {
+      height: "auto",
+      width: 600,
+    },
+    tag: "form",
+  };
 
-    // Alternatively, you could use the following return statement to do a
-    // unique item sheet by type, like `weapon-sheet.hbs`.
-    return `${path}/item-${this.item.type}-sheet.hbs`;
+  static PARTS = {
+    form: {
+      template: "systems/lady-blackbird/templates/item/item-trait-sheet.hbs",
+    },
+  };
+
+  _onRender(context, options) {
+    super._onRender(context, options);
   }
 
-  /* -------------------------------------------- */
+  static async _onToggleEditMode(event, target) {
+    event.preventDefault();
+    this._editModeEnabled = !this._editModeEnabled;
+    await this.submit();
+    this.render();
+  }
 
-  /** @override */
-  async getData() {
-    // Retrieve base data structure.
-    const context = super.getData();
+  async _prepareContext(options = {}) {
+    const context = await super._prepareContext(options);
+    const data = this.document.toObject(false);
 
-    // Use a safe clone of the item data for further operations.
-    const itemData = this.document.toPlainObject();
+    const isEditable = this.isEditable;
 
-    // Enrich description info for display
-    // Enrichment turns text like `[[/r 1d20]]` into buttons
-    context.enrichedDescription = await TextEditor.enrichHTML(
-      this.item.system.description,
-      {
-        // Whether to show secret blocks in the finished html
-        secrets: this.document.isOwner,
-        // Necessary in v11, can be removed in v12
-        async: true,
-        // Data to fill in for inline rolls
-        rollData: this.item.getRollData(),
-        // Relative UUID resolution
-        relativeTo: this.item,
-      }
-    );
+    context.cssClass = isEditable ? "editable" : "locked";
+    context.editable = isEditable;
 
-    // Add the item's data to context.data for easier access, as well as flags.
-    context.system = itemData.system;
-    context.flags = itemData.flags;
+    context.editModeEnabled = this._editModeEnabled;
+    context.editModeDisabled = !context.editModeEnabled;
 
-    // Adding a pointer to CONFIG.LADY_BLACKBIRD
-    context.config = CONFIG.LADY_BLACKBIRD;
+    context.document = this.document;
+    context.data = data;
+    context.item = this.item;
+    context.systemSource = this.system._source;
+    context.systemFields = this.document.system.schema.fields;
+    context.system = this.system;
 
-    // Prepare active effects for easier access
-    context.effects = prepareActiveEffectCategories(this.item.effects);
+    console.log("context", context);
 
     return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    // Everything below here is only needed if the sheet is editable
-    if (!this.isEditable) return;
-
-    // Roll handlers, click handlers, etc. would go here.
-
-    // Active Effect management
-    html.on("click", ".effect-control", (ev) =>
-      onManageActiveEffect(ev, this.item)
-    );
   }
 }

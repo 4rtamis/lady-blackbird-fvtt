@@ -1,0 +1,64 @@
+<div
+  class="{{cssClass}} {{item.type}} overflow-auto bg-white font-serif"
+  autocomplete="off"
+>
+  <a class="sheet-header-control" data-action="toggleEditMode">
+    {{#if editModeEnabled}}
+      <i
+        class="fa-solid fa-lock-open"
+        data-tooltip="DNM.Tooltips.Sheet.LockSheet"
+      ></i>
+    {{else}}
+      <i
+        class="fa-solid fa-lock"
+        data-tooltip="DNM.Tooltips.Sheet.UnlockSheet"
+      ></i>
+    {{/if}}
+  </a>
+
+  {{log "item" item}}
+
+  <div class="mx-auto max-w-4xl p-6">
+    <div class="victorian-ornaments">
+      <h1
+        class="my-1 translate-y-px text-center font-serif text-4xl font-bold"
+        style="font-variant-caps: small-caps;"
+      >
+        <input
+          class="text-center text-4xl"
+          name="name"
+          type="text"
+          value="{{item.name}}"
+          placeholder="Name of the trait"
+          {{disabled editModeDisabled}}
+        />
+      </h1>
+
+      <input
+        class="m-0 mb-2 w-full px-2 text-center font-serif text-base italic"
+        name="system.description"
+        type="text"
+        value="{{system.description}}"
+        placeholder="A short description of the trait"
+        {{disabled editModeDisabled}}
+      />
+
+      <div class="border-b px-4 py-2">
+        <h4 class="m-0 font-serif text-xl font-normal">Burglar</h4>
+      </div>
+      <div class="px-4 py-2">
+        <p class="italic">Quiet</p>
+        <p class="italic">Sneak</p>
+        <p class="italic">Dexterous</p>
+        <p class="italic">Locks</p>
+        <p class="italic">Perceptive</p>
+        <p class="italic">Traps</p>
+        <p class="italic">Darkness</p>
+        <p class="italic">Alarm</p>
+        <p class="italic">Distractions</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>

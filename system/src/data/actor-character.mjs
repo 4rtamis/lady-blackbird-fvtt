@@ -10,27 +10,6 @@ export default class LadyBlackbirdCharacter extends LadyBlackbirdActorBase {
       blank: true,
     });
 
-    schema.traits = new fields.ArrayField(
-      new fields.SchemaField({
-        name: new fields.StringField({
-          required: true,
-          blank: false,
-        }),
-        tags: new fields.ArrayField(
-          new fields.SchemaField({
-            name: new fields.StringField({
-              required: true,
-              blank: false,
-            }),
-            group: new fields.StringField({
-              required: false,
-              blank: true,
-            }),
-          }),
-        ),
-      }),
-    );
-
     return schema;
   }
 

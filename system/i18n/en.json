@@ -43,9 +43,7 @@
       "character": "Character"
     },
     "Item": {
-      "item": "Item",
-      "feature": "Feature",
-      "spell": "Spell"
+      "trait": "Trait"
     }
   }
 }
