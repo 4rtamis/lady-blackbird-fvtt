@@ -50,6 +50,39 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     return this.#dragDrop;
   }
 
+  #attachContextMenus() {
+    // Create a context menu for items
+    new foundry.applications.ux.ContextMenu.implementation(
+      this.element,
+      '[data-menu="item"]',
+      [
+        {
+          name: "Edit Item",
+          icon: '<i class="fas fa-pencil"></i>',
+          callback: async (i) => {
+            const uuid = i.dataset.uuid;
+            if (!uuid) return;
+            const item = await fromUuid(uuid);
+            item?.sheet?.render(true);
+          },
+        },
+        {
+          name: "Delete Item",
+          icon: '<i class="fas fa-trash"></i>',
+          callback: async (i) => {
+            const uuid = i.dataset.uuid;
+            if (!uuid) return;
+            const item = await fromUuid(uuid);
+            await item?.delete?.();
+          },
+        },
+      ],
+      {
+        jQuery: false,
+      },
+    );
+  }
+
   // Create the drag-drop handlers
   #createDragDropHandlers() {
     return this.options.dragDrop.map((d) => {
@@ -179,6 +212,7 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
 
   async _onFirstRender(context, options) {
     await super._onFirstRender(context, options);
+    this.#attachContextMenus();
   }
 
   /** @override */
