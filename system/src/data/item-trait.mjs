@@ -1,6 +1,6 @@
 import LadyBlackbirdItemBase from "./base-item.mjs";
 
-export default class LadyBlackbirdFeature extends LadyBlackbirdItemBase {
+export default class LadyBlackbirdTrait extends LadyBlackbirdItemBase {
   static defineSchema() {
     const schema = super.defineSchema();
     const fields = foundry.data.fields;
@@ -30,6 +30,7 @@ export default class LadyBlackbirdFeature extends LadyBlackbirdItemBase {
   }
 
   prepareDerivedData() {
+    console.log("Preparing derived data for Trait", this);
     super.prepareDerivedData();
 
     const sortedTags = this.tags.sort((a, b) => {

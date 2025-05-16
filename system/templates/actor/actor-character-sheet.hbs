@@ -58,23 +58,69 @@
               &
               {{localize "LADY_BLACKBIRD.CharacterSheet.Tags"}}</h2>
           </div>
-          <div class="grid grid-cols-1 gap-4 border-y md:grid-cols-4">
-            <div class="border-x">
-              <div class="border-b px-4 py-2">
-                <h4 class="m-0 font-serif text-xl font-normal">Burglar</h4>
+          <div class="grid grid-cols-1 border-y md:grid-cols-4">
+            {{#each traits}}
+              <div class="border-x" data-uuid="{{this.uuid}}">
+                <div class="border-b px-4 py-2">
+                  <h4
+                    class="m-0 font-serif text-xl font-normal"
+                    data-uuid="{{uuid}}"
+                  >
+                    {{name}}
+                  </h4>
+                </div>
+                <div class="px-2 py-2">
+                  {{! Ungrouped Tags }}
+                  {{#each system.sortedTags.ungrouped as |tag|}}
+                    <div
+                      class="mb-1 flex flex-row items-center justify-start px-1"
+                    >
+                      {{#if tag.power}}
+                        {{#times tag.power}}
+                          <div class="mr-1 h-3 w-3 rounded-full bg-black"></div>
+                        {{/times}}
+                      {{else}}
+                        <div
+                          class="mr-1 h-3 w-3 rounded-full border border-black"
+                        ></div>
+                      {{/if}}
+                      <p class="my-0 text-base italic">{{tag.name}}</p>
+                    </div>
+                  {{/each}}
+
+                  {{! Grouped Tags }}
+                  {{#each system.sortedTags.grouped as |tags groupName|}}
+                    <div class="relative mb-2 border border-black p-1">
+                      <div
+                        class="absolute left-1/2 top-0 w-max -translate-x-1/2 -translate-y-1/2 bg-white text-center text-[6pt] font-bold uppercase"
+                      >Pick one tag per roll</div>
+
+                      {{#each tags as |tag|}}
+                        <div
+                          class="mb-1 flex flex-row items-center justify-start"
+                        >
+                          {{#if tag.power}}
+                            {{#times tag.power}}
+                              <div
+                                class="mr-1 h-3 w-3 rounded-full bg-black"
+                              ></div>
+                            {{/times}}
+                          {{else}}
+                            <div
+                              class="mr-1 h-3 w-3 rounded-full border border-black"
+                            ></div>
+                          {{/if}}
+                          <p class="my-0 text-base italic">{{tag.name}}</p>
+                        </div>
+                      {{/each}}
+                    </div>
+                  {{/each}}
+
+                </div>
               </div>
-              <div class="px-4 py-2">
-                <p class="italic">Quiet</p>
-                <p class="italic">Sneak</p>
-                <p class="italic">Dexterous</p>
-                <p class="italic">Locks</p>
-                <p class="italic">Perceptive</p>
-                <p class="italic">Traps</p>
-                <p class="italic">Darkness</p>
-                <p class="italic">Alarm</p>
-                <p class="italic">Distractions</p>
-              </div>
-            </div>
+
+            {{/each}}
+
           </div>
         </div>
 

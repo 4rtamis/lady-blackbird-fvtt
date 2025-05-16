@@ -3,6 +3,14 @@
  * @extends {Item}
  */
 export class LadyBlackbirdItem extends Item {
+  async _preCreate(data, options, user) {
+    await super._preCreate(data, options, user);
+
+    if (data.img === undefined) {
+      let icon = `systems/lady-blackbird/assets/icons/${data.type}.svg`;
+      this.updateSource({ img: icon });
+    }
+  }
   /**
    * Augment the basic Item data model with additional dynamic data.
    */
@@ -10,6 +18,12 @@ export class LadyBlackbirdItem extends Item {
     // As with the actor class, items are documents that can have their data
     // preparation methods overridden (such as prepareBaseData()).
     super.prepareData();
+  }
+
+  prepareDerivedData() {
+    // As with the actor class, items are documents that can have their data
+    // preparation methods overridden (such as prepareBaseData()).
+    super.prepareDerivedData();
   }
 
   /**

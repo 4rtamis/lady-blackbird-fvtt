@@ -1,4 +1,5 @@
 const { sheets, api } = foundry.applications;
+import LadyBlackbirdItemBase from "../data/base-item.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -9,6 +10,7 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
 ) {
   // Define the default options for the sheet
   _editModeEnabled = false;
+  #dragDrop = this.#createDragDropHandlers();
 
   /** @override */
   static DEFAULT_OPTIONS = {
@@ -25,6 +27,7 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     window: {
       resizable: true,
     },
+    dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
     actions: {
       //editImage: this._onEditImage,
       onRoll: this._onRoll,
@@ -41,6 +44,78 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
 
   get system() {
     return this.actor.system;
+  }
+
+  get dragDrop() {
+    return this.#dragDrop;
+  }
+
+  // Create the drag-drop handlers
+  #createDragDropHandlers() {
+    return this.options.dragDrop.map((d) => {
+      d.permissions = {
+        dragstart: this._canDragStart.bind(this),
+        drop: this._canDragDrop.bind(this),
+      };
+      d.callbacks = {
+        dragstart: this._onDragStart.bind(this),
+        dragover: this._onDragOver.bind(this),
+        drop: this._onDrop.bind(this),
+      };
+      return new foundry.applications.ux.DragDrop.implementation(d);
+    });
+  }
+
+  _canDragDrop(selector) {
+    return this.isEditable;
+  }
+
+  _canDragStart(selector) {
+    return this.isEditable;
+  }
+
+  async _onDrop(event) {
+    const data =
+      foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
+    const actor = this.actor;
+
+    // Allow hooks to intercept the drop
+    const allowed = Hooks.call("dropActorSheetData", actor, this, data);
+    if (allowed === false) return;
+
+    switch (data.type) {
+      case "ActiveEffect":
+      case "Actor":
+      case "Folder":
+        break;
+      case "Item":
+        return this._onDropItem(event, data);
+    }
+  }
+
+  async _onDropItem(event, data) {
+    if (!this.actor.isOwner) return false;
+
+    // In your case, you might need to use a different method to get the item data
+    const item = await Item.implementation.fromDropData(data);
+
+    // Special handling for Trait items
+    if (item.type === "trait") {
+      // Add any special processing for trait items here
+      // For example, you might want to handle trait-specific properties
+    }
+
+    // Handle item sorting within the same Actor
+    if (this.actor.uuid === item.parent?.uuid)
+      return this._onSortItem(event, item);
+
+    // Create the owned item
+    return this._onDropItemCreate(item, event);
+  }
+
+  async _onDropItemCreate(itemData, event) {
+    itemData = itemData instanceof Array ? itemData : [itemData];
+    return this.actor.createEmbeddedDocuments("Item", itemData);
   }
 
   static async _onToggleEditMode(event, target) {
@@ -72,7 +147,7 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     const context = await super._prepareContext();
 
     // Use a safe clone of the actor data for further operations.
-    const data = this.document.toObject(false);
+    const data = this.document.toPlainObject(false);
 
     const isEditable = this.isEditable;
 
@@ -91,10 +166,12 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     context.effects = context.data.effects;
     context.items = context.data.items;
     context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    context.traits = context.data.items.filter((i) => i.type === "trait");
     context.systemSource = this.actor.system._source;
     context.systemFields = this.document.system.schema.fields;
     context.system = this.system;
 
+    console.log("context", context.traits);
     return context;
   }
 
@@ -107,5 +184,6 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
   /** @override */
   _onRender(context, options) {
     super._onRender(context, options);
+    this.#dragDrop.forEach((d) => d.bind(this.element));
   }
 }

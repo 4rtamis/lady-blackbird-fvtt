@@ -16,7 +16,7 @@ export class LadyBlackbirdItemSheet extends api.HandlebarsApplicationMixin(
       addTag: LadyBlackbirdItemSheet._onAddTag,
       removeTag: LadyBlackbirdItemSheet._onRemoveTag,
     },
-    classes: ["NOlady-blackbird", "sheet", "item-sheet"],
+    classes: ["NOlady-blackbird", "sheet", "item-sheet", "draggable"],
     form: {
       closeOnSubmit: false,
       submitOnChange: true,
@@ -68,7 +68,7 @@ export class LadyBlackbirdItemSheet extends api.HandlebarsApplicationMixin(
 
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
-    const data = this.document.toObject(false);
+    const data = this.document.toPlainObject();
 
     const isEditable = this.isEditable;
 
