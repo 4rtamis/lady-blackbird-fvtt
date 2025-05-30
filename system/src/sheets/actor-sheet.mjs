@@ -173,17 +173,30 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
 
   static async _onToggleTag(event, target) {
     event.preventDefault();
+
     const name = target.dataset.name;
     const group = target.dataset.group;
     const power = target.dataset.power;
-    const tag = { name: name, group: group, power: power };
+    const trait = target.dataset.trait;
+    const traitUuid = target.dataset.traitUuid;
+    const tag = {
+      name: name,
+      group: group,
+      power: power,
+      trait: trait,
+      traitUuid: traitUuid,
+    };
 
     const selectedTags = this._selectedTags;
 
-    // Check if the tag is already selected
+    // Check if the tag is already selected,
     const tagIndex = selectedTags.findIndex(
       (t) =>
-        t.name === tag.name && t.group === tag.group && t.power === tag.power,
+        t.name === tag.name &&
+        t.group === tag.group &&
+        t.power === tag.power &&
+        t.trait === tag.trait &&
+        t.traitUuid === tag.traitUuid,
     );
     if (tagIndex !== -1) {
       // If the tag is already selected, remove it
@@ -192,7 +205,12 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
       // If the group is "default", simply add the tag
       if (tag.group !== "default") {
         // If the tag is not selected, check if one tag from the group is already selected
-        const groupIndex = selectedTags.findIndex((t) => t.group === tag.group);
+        const groupIndex = selectedTags.findIndex(
+          (t) =>
+            t.group === tag.group &&
+            t.trait === tag.trait &&
+            t.traitUuid === tag.traitUuid,
+        );
         if (groupIndex !== -1) {
           // If one tag from the group is already selected, remove it
           selectedTags.splice(groupIndex, 1);
@@ -202,8 +220,6 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
       selectedTags.push(tag);
     }
 
-    console.log("New Tag", tag);
-    console.log("Selected Tags", selectedTags);
     await this.submit();
     this.render();
   }

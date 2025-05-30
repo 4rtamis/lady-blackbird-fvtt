@@ -1,561 +1,411 @@
-<div
-  class="{{cssClass}} {{actor.type}} overflow-auto bg-white font-serif"
-  autocomplete="off"
->
+<div class="{{cssClass}} {{actor.type}} overflow-auto bg-white font-serif"
+     autocomplete="off">
   <a class="sheet-header-control" data-action="toggleEditMode">
-    {{#if editModeEnabled}}
-      <i
-        class="fa-solid fa-lock-open"
-        data-tooltip="DNM.Tooltips.Sheet.LockSheet"
-      ></i>
+    {{#if editModeEnabled }}
+      <i class="fa-solid fa-lock-open"
+         data-tooltip="DNM.Tooltips.Sheet.LockSheet"></i>
     {{else}}
-      <i
-        class="fa-solid fa-lock"
-        data-tooltip="DNM.Tooltips.Sheet.UnlockSheet"
-      ></i>
+      <i class="fa-solid fa-lock"
+         data-tooltip="DNM.Tooltips.Sheet.UnlockSheet"></i>
     {{/if}}
   </a>
-
   <button data-action="onRoll" class="sheet-header-control" data-formula="1d20">
-    <i
-      class="fa-solid fa-dice-d20"
-      data-tooltip="DNM.Tooltips.Sheet.RollDice"
-    ></i>
+    <i class="fa-solid fa-dice-d20"
+       data-tooltip="DNM.Tooltips.Sheet.RollDice"></i>
   </button>
-
   <div class="mx-auto max-w-4xl p-6">
     <div class="victorian-ornaments">
-      <h1
-        class="my-1 translate-y-px text-center font-serif text-4xl font-bold"
-        style="font-variant-caps: small-caps;"
-      >
-        <input
-          class="text-center text-4xl"
-          name="name"
-          type="text"
-          value="{{actor.name}}"
-          placeholder="Name"
-          {{disabled editModeDisabled}}
-        />
+      <h1 class="my-1 translate-y-px text-center font-serif text-4xl font-bold small-caps">
+        <input class="text-center text-4xl"
+               name="name"
+               type="text"
+               value="{{actor.name}}"
+               placeholder="Name"
+               {{disabled editModeDisabled}} />
       </h1>
-
-      <input
-        class="m-0 mb-2 w-full px-2 text-center font-serif text-base italic"
-        name="system.description"
-        type="text"
-        value="{{system.description}}"
-        placeholder="A short description of the character"
-        {{disabled editModeDisabled}}
-      />
-
+      <input class="m-0 mb-2 w-full px-2 text-center font-serif text-base italic"
+             name="system.description"
+             type="text"
+             value="{{system.description}}"
+             placeholder="A short description of the character"
+             {{disabled editModeDisabled}} />
       <div class="mb-6 grid grid-cols-1 md:grid-cols-6">
         <!-- Traits & Tags -->
         <div class="md:col-span-6">
           <div class="flex w-full items-center justify-center bg-black">
-            <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
-            >{{localize "LADY_BLACKBIRD.CharacterSheet.Traits"}}
+            <h2 class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white">
+              {{localize "LADY_BLACKBIRD.CharacterSheet.Traits"}}
               &
-              {{localize "LADY_BLACKBIRD.CharacterSheet.Tags"}}</h2>
+              {{localize "LADY_BLACKBIRD.CharacterSheet.Tags"}}
+            </h2>
           </div>
           <div class="grid grid-cols-1 border-y md:grid-cols-4">
-            {{#each traits}}
+            {{#each traits }}
               <div class="border-x" data-menu="item" data-uuid="{{this.uuid}}">
                 <div class="border-b px-4 py-2">
-                  <h4 class="m-0 font-serif text-xl font-normal">
-                    {{name}}
-                  </h4>
+                  <h4 class="m-0 font-serif text-xl font-normal">{{name}}</h4>
                 </div>
                 <div class="px-2 py-2">
                   {{! Ungrouped Tags }}
-                  {{#let traitName=name traitSystem=system}}
-                    {{#each traitSystem.sortedTags.ungrouped as |tag|}}
-                      <div
-                        class="mb-1 flex flex-row items-center justify-start px-1"
-                      >
-                        {{#if tag.power}}
-                          {{#times tag.power}}
-                            <div
-                              class="mr-1 h-3 w-3 rounded-full bg-black"
-                            ></div>
-                          {{/times}}
-                        {{else}}
-                          <div
-                            class="mr-1 h-3 w-3 rounded-full border border-black"
-                          ></div>
-                        {{/if}}
-                        {{#ifTagSelected
-                          tag.name "default" tag.power @root.selectedTags
-                        }}
-                          <p
-                            data-action="toggleTag"
-                            data-trait="{{traitName}}"
-                            data-name="{{tag.name}}"
-                            data-group="default"
-                            data-power="{{tag.power}}"
-                            class="my-0 text-base italic text-red-500"
-                          >{{tag.name}}</p>
-                        {{else}}
-                          <p
-                            data-action="toggleTag"
-                            data-trait="{{traitName}}"
-                            data-name="{{tag.name}}"
-                            data-group="default"
-                            data-power="{{tag.power}}"
-                            class="my-0 text-base italic"
-                          >{{tag.name}}</p>
-                        {{/ifTagSelected}}
-                      </div>
-                    {{/each}}
-
-                    {{! Grouped Tags }}
-                    {{#each traitSystem.sortedTags.grouped as |tags groupName|}}
-                      <div class="relative mb-2 border border-black p-1">
-                        <div
-                          class="absolute left-1/2 top-0 w-max -translate-x-1/2 -translate-y-1/2 bg-white text-center text-[6pt] font-bold uppercase"
-                        >Pick one tag per roll</div>
-
-                        {{#each tags as |tag|}}
-                          <div
-                            class="mb-1 flex flex-row items-center justify-start"
-                          >
-                            {{#if tag.power}}
-                              {{#times tag.power}}
-                                <div
-                                  class="mr-1 h-3 w-3 rounded-full bg-black"
-                                ></div>
-                              {{/times}}
-                            {{else}}
-                              <div
-                                class="mr-1 h-3 w-3 rounded-full border border-black"
-                              ></div>
-                            {{/if}}
-                            {{#ifTagSelected
-                              tag.name tag.group tag.power @root.selectedTags
-                            }}
-                              <p
-                                data-action="toggleTag"
-                                data-trait="{{traitName}}"
-                                data-name="{{tag.name}}"
-                                data-group="{{tag.group}}"
-                                data-power="{{tag.power}}"
-                                class="my-0 text-base italic text-red-500"
-                              >{{tag.name}}</p>
-                            {{else}}
-                              <p
-                                data-action="toggleTag"
-                                data-trait="{{traitName}}"
-                                data-name="{{tag.name}}"
-                                data-group="{{tag.group}}"
-                                data-power="{{tag.power}}"
-                                class="my-0 text-base italic"
-                              >{{tag.name}}</p>
-                            {{/ifTagSelected}}
-                          </div>
-                        {{/each}}
-                      </div>
-                    {{/each}}
-                  {{/let}}
-
+                  {{#let traitName=name traitSystem=system traitUuid=this.uuid}}
+                  {{#each traitSystem.sortedTags.ungrouped as |tag| }}
+                    <div class="mb-1 flex flex-row items-center justify-start px-1">
+                      {{#if tag.power }}
+                        {{#times tag.power}}
+                        <div class="mr-1 h-3 w-3 rounded-full bg-black"></div>
+                      {{/times}}
+                    {{else}}
+                      <div class="mr-1 h-3 w-3 rounded-full border border-black"></div>
+                    {{/if}}
+                    {{#ifTagSelected
+                    tag.name "default" tag.power @root.selectedTags
+                    }}
+                    <p data-action="toggleTag"
+                       data-trait="{{../traitName}}"
+                       data-trait-uuid="{{../traitUuid}}"
+                       data-name="{{tag.name}}"
+                       data-group="default"
+                       data-power="{{tag.power}}"
+                       class="tag selected my-0 text-base italic cursor-pointer">{{tag.name}}</p>
+                  {{else}}
+                    <p data-action="toggleTag"
+                       data-trait="{{../traitName}}"
+                       data-trait-uuid="{{../traitUuid}}"
+                       data-name="{{tag.name}}"
+                       data-group="default"
+                       data-power="{{tag.power}}"
+                       class="tag my-0 text-base italic cursor-pointer">{{tag.name}}</p>
+                  {{/ifTagSelected}}
                 </div>
-              </div>
-
-            {{/each}}
-
-          </div>
-        </div>
-
-        <!-- Conditions -->
-        <div class="border-r border-black md:col-span-3">
-          <div class="flex w-full items-center justify-center bg-black">
-            <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
-            >{{localize "LADY_BLACKBIRD.CharacterSheet.Conditions"}}</h2>
-          </div>
-          <div>
-
-            <div class="flex flex-wrap">
-              <div
-                class="grid w-full grid-cols-3 items-center justify-around p-2"
-              >
-                <label class="mb-1 flex items-center before:hidden">
-                  <input
-                    type="checkbox"
-                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
-                  />
-                  Injured
-                </label>
-                <label class="mb-1 flex items-center before:hidden">
-                  <input
-                    type="checkbox"
-                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
-                  />
-                  Dead
-                </label>
-                <label class="mb-1 flex items-center before:hidden">
-                  <input
-                    type="checkbox"
-                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
-                  />
-                  Tired
-                </label>
-                <label class="mb-1 flex items-center before:hidden">
-                  <input
-                    type="checkbox"
-                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
-                  />
-                  Angry
-                </label>
-                <label class="mb-1 flex items-center before:hidden">
-                  <input
-                    type="checkbox"
-                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
-                  />
-                  Lost
-                </label>
-                <label class="mb-1 flex items-center before:hidden">
-                  <input
-                    type="checkbox"
-                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
-                  />
-                  Hunted
-                </label>
-                <label class="mb-1 flex items-center before:hidden">
-                  <input
-                    type="checkbox"
-                    class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black"
-                  />
-                  Trapped
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Dice Pool -->
-        <div class="border-r border-black md:col-span-1">
-          <div class="flex w-full items-center justify-center bg-black">
-            <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
-            >{{localize "LADY_BLACKBIRD.CharacterSheet.DicePool"}}</h2>
-          </div>
-
-          <div class="grid grid-cols-4 items-center justify-center p-2">
-            <input
-              type="checkbox"
-              id="die1"
-              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-            />
-            <input
-              type="checkbox"
-              id="die2"
-              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-            />
-            <input
-              type="checkbox"
-              id="die3"
-              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-            />
-            <input
-              type="checkbox"
-              id="die4"
-              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-            />
-            <input
-              type="checkbox"
-              id="die5"
-              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-            />
-            <input
-              type="checkbox"
-              id="die6"
-              class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-            />
-
-          </div>
-
-        </div>
-
-        <!-- Experience -->
-        <div class="border-r border-black md:col-span-2">
-          <div class="flex w-full items-center justify-center bg-black">
-            <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
-            >{{localize "LADY_BLACKBIRD.CharacterSheet.Experience"}}</h2>
-          </div>
-
-          <div class="flex flex-col items-center justify-start space-y-2 p-2">
-            <div class="grid grid-cols-5">
-              <input
-                type="checkbox"
-                id="xp1"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp2"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp3"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp4"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp5"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp6"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp7"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp8"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp9"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp10"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp11"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp12"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp13"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp14"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-              <input
-                type="checkbox"
-                id="xp15"
-                class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black"
-              />
-            </div>
-            <div>
-              <p class="m-0 inline-block text-xs">
-                {{localize "LADY_BLACKBIRD.CharacterSheet.ExperienceTip"}}
-              </p>
-              <div
-                class="border-b-1 group relative mb-0 inline-block border-l-0 border-r-0 border-t-0 border-dotted border-black text-xs hover:cursor-pointer"
-              >
-                {{toLowerCase
-                  (localize "LADY_BLACKBIRD.CharacterSheet.Improvements")
-                }}
-                <div
-                  class="invisible absolute right-0 top-5 z-40 w-64 border border-black bg-white p-2 shadow-2xl group-hover:visible"
-                >
-                  <ul class="m-0 list-none space-y-1 p-0 text-xs *:m-0">
-                    {{{localize
-                      "LADY_BLACKBIRD.CharacterSheet.BuyingImprovements"
-                    }}}
-                  </ul>
+              {{/each}}
+              {{! Grouped Tags }}
+              {{#each traitSystem.sortedTags.grouped as |tags groupName| }}
+                <div class="relative mb-2 border border-black p-1">
+                  <div class="absolute left-1/2 top-0 w-max -translate-x-1/2 -translate-y-1/2 bg-white text-center text-[6pt] font-bold uppercase">
+                    Pick one tag per roll
+                  </div>
+                  {{#each tags as |tag| }}
+                    <div class="mb-1 flex flex-row items-center justify-start">
+                      {{#if tag.power }}
+                        {{#times tag.power}}
+                        <div class="mr-1 h-3 w-3 rounded-full bg-black"></div>
+                      {{/times}}
+                    {{else}}
+                      <div class="mr-1 h-3 w-3 rounded-full border border-black"></div>
+                    {{/if}}
+                    {{#ifTagSelected
+                    tag.name tag.group tag.power @root.selectedTags
+                    }}
+                    <p data-action="toggleTag"
+                       data-trait="{{../traitName}}"
+                       data-trait-uuid="{{../traitUuid}}"
+                       data-name="{{tag.name}}"
+                       data-group="{{tag.group}}"
+                       data-power="{{tag.power}}"
+                       class="tag selected my-0 cursor-pointer text-base italic">{{tag.name}}</p>
+                  {{else}}
+                    <p data-action="toggleTag"
+                       data-trait="{{../traitName}}"
+                       data-trait-uuid="{{../traitUuid}}"
+                       data-name="{{tag.name}}"
+                       data-group="{{tag.group}}"
+                       data-power="{{tag.power}}"
+                       class="tag my-0 cursor-pointer text-base italic">{{tag.name}}</p>
+                  {{/ifTagSelected}}
                 </div>
-              </div>.
+              {{/each}}
             </div>
-          </div>
-
-        </div>
-
-        <!-- Keys -->
-        <div class="border-r-1 border-black md:col-span-3">
-          <div class="flex w-full items-center justify-center bg-black">
-            <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
-            >{{localize "LADY_BLACKBIRD.CharacterSheet.Keys"}}</h2>
-          </div>
-
-          <div class="space-y-4 px-4 py-4">
-            <div class="key">
-              <div class="mb-2 overflow-hidden">
-                <div class="relative border-2 border-black">
-                  <i
-                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <p class="px-3 text-lg font-semibold leading-4">Key of Greed</p>
-                  <i
-                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                </div>
-              </div>
-
-              <p class="m-0">You like the shiny things. Turn this key when you
-                steal something cool or score a big payoff.</p>
-              <p class="m-0 italic">Buyoff: Swear off stealing forever.</p>
-            </div>
-
-            <div class="key">
-              <div class="mb-2 overflow-hidden">
-                <div class="relative border-2 border-black">
-                  <i
-                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <p class="px-3 text-lg font-semibold leading-4">Key of the
-                    Mission</p>
-                  <i
-                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                </div>
-              </div>
-
-              <p class="m-0">You must safely deliver Lady Blackbird to the
-                Pirate King Uriah Flint, so she can marry him. Turn this key
-                when you take action to complete the mission.</p>
-              <p class="m-0 italic">Buyoff: Give up the mission.</p>
-            </div>
-
-            <div class="key">
-              <div class="mb-2 overflow-hidden">
-                <div class="relative border-2 border-black">
-                  <i
-                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <p class="px-3 text-lg font-semibold leading-4">Key of
-                    Fraternity</p>
-                  <i
-                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                </div>
-              </div>
-
-              <p class="m-0">You are sworn to Captain Vance in a bond of
-                brotherhood. Turn this key when your character is influenced by
-                Vance or when you show how deep your bond is.</p>
-              <p class="m-0 italic">Buyoff: Sever the relationship.</p>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Secrets -->
-        <div class="md:col-span-3">
-          <div class="flex w-full items-center justify-center bg-black">
-            <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
-            >{{localize "LADY_BLACKBIRD.CharacterSheet.Secrets"}}</h2>
-          </div>
-
-          <div class="space-y-4 px-4 py-4">
-            <div class="key">
-              <div class="mb-2 overflow-hidden">
-                <div class="relative border-2 border-black">
-                  <i
-                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <p class="px-3 text-lg font-semibold leading-4">Secret of
-                    Concealment</p>
-                  <i
-                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                </div>
-              </div>
-
-              <p class="m-0">No matter how thoroughly you're searched, you
-                always have a few key items with you. You can produce any
-                common, simple item at a moment's notice.</p>
-            </div>
-
-            <div class="key">
-              <div class="mb-2 overflow-hidden">
-                <div class="relative border-2 border-black">
-                  <i
-                    class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <p class="px-3 text-lg font-semibold leading-4">Secret of
-                    Reflexes</p>
-                  <i
-                    class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                  <i
-                    class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"
-                  ></i>
-                </div>
-              </div>
-
-              <p class="m-0">Once per refresh, you can re-roll a failure when
-                doing anything involving grace, dexterity, or quick reflexes.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Items & Apparence-->
-        <div class="border-r border-black md:col-span-6">
-          <div class="flex w-full items-center justify-center bg-black">
-            <h2
-              class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white"
-            >
-              {{localize "LADY_BLACKBIRD.CharacterSheet.Items"}}
-              &
-              {{localize "LADY_BLACKBIRD.CharacterSheet.Appearance"}}
-            </h2>
-          </div>
-          <div class="p-2">
-            <p class="text-sm">Kale Arkham begins detained in the brig,
-              weaponless.</p>
-            <p class="text-sm">Items: Mechanic's garb and tools — Dagger — Lock
-              picks — Trick cards — Goggles</p>
-          </div>
-        </div>
+          {{/each}}
+        {{/let}}
       </div>
-
+    </div>
+  {{/each}}
+</div>
+</div>
+<!-- Conditions -->
+<div class="border-r border-black md:col-span-3">
+  <div class="flex w-full items-center justify-center bg-black">
+    <h2 class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white">
+      {{localize "LADY_BLACKBIRD.CharacterSheet.Conditions"}}
+    </h2>
+  </div>
+  <div>
+    <div class="flex flex-wrap">
+      <div class="grid w-full grid-cols-3 items-center justify-around p-2">
+        <label class="mb-1 flex items-center before:hidden">
+          <input type="checkbox"
+                 class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black" />
+          Injured
+        </label>
+        <label class="mb-1 flex items-center before:hidden">
+          <input type="checkbox"
+                 class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black" />
+          Dead
+        </label>
+        <label class="mb-1 flex items-center before:hidden">
+          <input type="checkbox"
+                 class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black" />
+          Tired
+        </label>
+        <label class="mb-1 flex items-center before:hidden">
+          <input type="checkbox"
+                 class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black" />
+          Angry
+        </label>
+        <label class="mb-1 flex items-center before:hidden">
+          <input type="checkbox"
+                 class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black" />
+          Lost
+        </label>
+        <label class="mb-1 flex items-center before:hidden">
+          <input type="checkbox"
+                 class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black" />
+          Hunted
+        </label>
+        <label class="mb-1 flex items-center before:hidden">
+          <input type="checkbox"
+                 class="mr-2 h-4 w-4 rounded-none border-2 border-black transition-colors duration-200 before:hidden after:hidden checked:border-black checked:bg-black" />
+          Trapped
+        </label>
+      </div>
     </div>
   </div>
-
+</div>
+<!-- Dice Pool -->
+<div class="border-r border-black md:col-span-1">
+  <div class="flex w-full items-center justify-center bg-black">
+    <h2 class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white">
+      {{localize "LADY_BLACKBIRD.CharacterSheet.DicePool"}}
+    </h2>
+  </div>
+  <div class="grid grid-cols-4 items-center justify-center p-2">
+    <input type="checkbox"
+           id="die1"
+           class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+    <input type="checkbox"
+           id="die2"
+           class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+    <input type="checkbox"
+           id="die3"
+           class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+    <input type="checkbox"
+           id="die4"
+           class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+    <input type="checkbox"
+           id="die5"
+           class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+    <input type="checkbox"
+           id="die6"
+           class="h-4 w-4 rounded-full border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+  </div>
+</div>
+<!-- Experience -->
+<div class="border-r border-black md:col-span-2">
+  <div class="flex w-full items-center justify-center bg-black">
+    <h2 class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white">
+      {{localize "LADY_BLACKBIRD.CharacterSheet.Experience"}}
+    </h2>
+  </div>
+  <div class="flex flex-col items-center justify-start space-y-2 p-2">
+    <div class="grid grid-cols-5">
+      <input type="checkbox"
+             id="xp1"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp2"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp3"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp4"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp5"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp6"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp7"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp8"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp9"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp10"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp11"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp12"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp13"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp14"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+      <input type="checkbox"
+             id="xp15"
+             class="h-3 w-3 border border-black transition-colors before:hidden after:hidden checked:border-black checked:bg-black" />
+    </div>
+    <div>
+      <p class="m-0 inline-block text-xs">{{localize "LADY_BLACKBIRD.CharacterSheet.ExperienceTip"}}</p>
+      <div class="border-b-1 group relative mb-0 inline-block border-l-0 border-r-0 border-t-0 border-dotted border-black text-xs hover:cursor-pointer">
+        {{toLowerCase
+        (localize "LADY_BLACKBIRD.CharacterSheet.Improvements")
+        }}
+        <div class="invisible absolute right-0 top-5 z-40 w-64 border border-black bg-white p-2 shadow-2xl group-hover:visible">
+          <ul class="m-0 list-none space-y-1 p-0 text-xs *:m-0">
+            {{{localize
+            "LADY_BLACKBIRD.CharacterSheet.BuyingImprovements"
+            }}}
+          </ul>
+        </div>
+      </div>
+      .
+    </div>
+  </div>
+</div>
+<!-- Keys -->
+<div class="border-r-1 border-black md:col-span-3">
+  <div class="flex w-full items-center justify-center bg-black">
+    <h2 class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white">
+      {{localize "LADY_BLACKBIRD.CharacterSheet.Keys"}}
+    </h2>
+  </div>
+  <div class="space-y-4 px-4 py-4">
+    <div class="key">
+      <div class="mb-2 overflow-hidden">
+        <div class="relative border-2 border-black">
+          <i class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <p class="px-3 text-lg font-semibold leading-4">Key of Greed</p>
+          <i class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+        </div>
+      </div>
+      <p class="m-0">
+        You like the shiny things. Turn this key when you
+        steal something cool or score a big payoff.
+      </p>
+      <p class="m-0 italic">Buyoff: Swear off stealing forever.</p>
+    </div>
+    <div class="key">
+      <div class="mb-2 overflow-hidden">
+        <div class="relative border-2 border-black">
+          <i class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <p class="px-3 text-lg font-semibold leading-4">
+            Key of the
+            Mission
+          </p>
+          <i class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+        </div>
+      </div>
+      <p class="m-0">
+        You must safely deliver Lady Blackbird to the
+        Pirate King Uriah Flint, so she can marry him. Turn this key
+        when you take action to complete the mission.
+      </p>
+      <p class="m-0 italic">Buyoff: Give up the mission.</p>
+    </div>
+    <div class="key">
+      <div class="mb-2 overflow-hidden">
+        <div class="relative border-2 border-black">
+          <i class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <p class="px-3 text-lg font-semibold leading-4">
+            Key of
+            Fraternity
+          </p>
+          <i class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+        </div>
+      </div>
+      <p class="m-0">
+        You are sworn to Captain Vance in a bond of
+        brotherhood. Turn this key when your character is influenced by
+        Vance or when you show how deep your bond is.
+      </p>
+      <p class="m-0 italic">Buyoff: Sever the relationship.</p>
+    </div>
+  </div>
+</div>
+<!-- Secrets -->
+<div class="md:col-span-3">
+  <div class="flex w-full items-center justify-center bg-black">
+    <h2 class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white">
+      {{localize "LADY_BLACKBIRD.CharacterSheet.Secrets"}}
+    </h2>
+  </div>
+  <div class="space-y-4 px-4 py-4">
+    <div class="key">
+      <div class="mb-2 overflow-hidden">
+        <div class="relative border-2 border-black">
+          <i class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <p class="px-3 text-lg font-semibold leading-4">
+            Secret of
+            Concealment
+          </p>
+          <i class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+        </div>
+      </div>
+      <p class="m-0">
+        No matter how thoroughly you're searched, you
+        always have a few key items with you. You can produce any
+        common, simple item at a moment's notice.
+      </p>
+    </div>
+    <div class="key">
+      <div class="mb-2 overflow-hidden">
+        <div class="relative border-2 border-black">
+          <i class="absolute left-0 top-0 -ml-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <p class="px-3 text-lg font-semibold leading-4">
+            Secret of
+            Reflexes
+          </p>
+          <i class="absolute bottom-0 right-0 -mb-2 -mr-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+          <i class="absolute bottom-0 left-0 -mb-2 -ml-2 h-4 w-4 rounded-full border-2 border-black bg-white"></i>
+        </div>
+      </div>
+      <p class="m-0">
+        Once per refresh, you can re-roll a failure when
+        doing anything involving grace, dexterity, or quick reflexes.
+      </p>
+    </div>
+  </div>
+</div>
+<!-- Items & Apparence-->
+<div class="border-r border-black md:col-span-6">
+  <div class="flex w-full items-center justify-center bg-black">
+    <h2 class="m-0 translate-y-px py-0.5 text-center font-serif text-lg font-semibold uppercase text-white">
+      {{localize "LADY_BLACKBIRD.CharacterSheet.Items"}}
+      &
+      {{localize "LADY_BLACKBIRD.CharacterSheet.Appearance"}}
+    </h2>
+  </div>
+  <div class="p-2">
+    <p class="text-sm">
+      Kale Arkham begins detained in the brig,
+      weaponless.
+    </p>
+    <p class="text-sm">
+      Items: Mechanic's garb and tools — Dagger — Lock
+      picks — Trick cards — Goggles
+    </p>
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>

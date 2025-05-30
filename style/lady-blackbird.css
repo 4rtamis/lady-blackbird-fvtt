@@ -8,6 +8,10 @@
     "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
+.small-caps {
+  font-variant-caps: small-caps;
+}
+
 .lady-blackbird.sheet .window-content {
   padding: 0;
 }
@@ -26,4 +30,18 @@
   border-image-repeat: round round;
   border-image-source: url("../assets/images/corner-ornaments.svg");
   border-style: solid;
+}
+
+.tag.selected,
+.trait.selected {
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 225, 0, 0.1),
+    rgba(255, 225, 0, 0.7) 4%,
+    rgba(255, 225, 0, 0.3)
+  );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
