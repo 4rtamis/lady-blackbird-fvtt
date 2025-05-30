@@ -1,25 +1,63 @@
 {
-  description = "A Nix-flake-based Node.js development environment";
+  description = "A Nix-flake-based Python + Node.js development environment";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
+  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
 
-  outputs = { self, nixpkgs }:
-    let
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
-        pkgs = import nixpkgs { inherit system; overlays = [ self.overlays.default ]; };
-      });
-    in
-    {
-      overlays.default = final: prev: rec {
-        nodejs = prev.nodejs;
-        yarn = (prev.yarn.override { inherit nodejs; });
+  outputs = inputs: let
+    supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
+    forEachSupportedSystem = f:
+      inputs.nixpkgs.lib.genAttrs supportedSystems (system:
+        f {
+          pkgs = import inputs.nixpkgs {inherit system;};
+        });
+
+    version = "3.13";
+  in {
+    devShells = forEachSupportedSystem ({pkgs}: let
+      concatMajorMinor = v:
+        pkgs.lib.pipe v [
+          pkgs.lib.versions.splitVersion
+          (pkgs.lib.sublist 0 2)
+          pkgs.lib.concatStrings
+        ];
+      python = pkgs."python${concatMajorMinor version}";
+    in {
+      default = pkgs.mkShell {
+        venvDir = ".venv";
+
+        postShellHook = ''
+                        venvVersionWarn() {
+                          local venvVersion
+                          venvVersion="$("$venvDir/bin/python" -c 'import platform; print(platform.python_version())')"
+
+                          [[ "$venvVersion" == "${python.version}" ]] && return
+
+                          cat <<EOF
+          Warning: Python version mismatch: [$venvVersion (venv)] != [${python.version}]
+                   Delete '$venvDir' and reload to rebuild for version ${python.version}
+          EOF
+                        }
+
+                        venvVersionWarn
+        '';
+
+        packages = with pkgs; [
+          # Python environment
+          python
+          python.pkgs.venvShellHook
+          python.pkgs.pip
+
+          # Node.js + JS package managers
+          nodejs
+          nodePackages.pnpm
+          yarn
+          node2nix
+
+          # Optional: linters or formatters
+          # python.pkgs.black
+          # python.pkgs.ruff
+        ];
       };
-
-      devShells = forEachSupportedSystem ({ pkgs }: {
-        default = pkgs.mkShell {
-          packages = with pkgs; [ node2nix nodejs nodePackages.pnpm yarn ];
-        };
-      });
-    };
+    });
+  };
 }
