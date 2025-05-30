@@ -1,4 +1,5 @@
 const { sheets, api } = foundry.applications;
+//import { select } from "@client/applications/handlebars.mjs";
 import LadyBlackbirdItemBase from "../data/base-item.mjs";
 
 /**
@@ -10,6 +11,7 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
 ) {
   // Define the default options for the sheet
   _editModeEnabled = false;
+  _selectedTags = [];
   #dragDrop = this.#createDragDropHandlers();
 
   /** @override */
@@ -29,9 +31,9 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     },
     dragDrop: [{ dragSelector: ".draggable", dropSelector: null }],
     actions: {
-      //editImage: this._onEditImage,
       onRoll: this._onRoll,
       toggleEditMode: this._onToggleEditMode,
+      toggleTag: this._onToggleTag,
     },
   };
 
@@ -169,6 +171,43 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     });
   }
 
+  static async _onToggleTag(event, target) {
+    event.preventDefault();
+    const name = target.dataset.name;
+    const group = target.dataset.group;
+    const power = target.dataset.power;
+    const tag = { name: name, group: group, power: power };
+
+    const selectedTags = this._selectedTags;
+
+    // Check if the tag is already selected
+    const tagIndex = selectedTags.findIndex(
+      (t) =>
+        t.name === tag.name && t.group === tag.group && t.power === tag.power,
+    );
+    if (tagIndex !== -1) {
+      // If the tag is already selected, remove it
+      selectedTags.splice(tagIndex, 1);
+    } else {
+      // If the group is "default", simply add the tag
+      if (tag.group !== "default") {
+        // If the tag is not selected, check if one tag from the group is already selected
+        const groupIndex = selectedTags.findIndex((t) => t.group === tag.group);
+        if (groupIndex !== -1) {
+          // If one tag from the group is already selected, remove it
+          selectedTags.splice(groupIndex, 1);
+        }
+      }
+      // Add the new tag to the selected tags
+      selectedTags.push(tag);
+    }
+
+    console.log("New Tag", tag);
+    console.log("Selected Tags", selectedTags);
+    await this.submit();
+    this.render();
+  }
+
   /* -------------------------------------------- */
 
   /** @override */
@@ -198,13 +237,13 @@ export class LadyBlackbirdActorSheet extends api.HandlebarsApplicationMixin(
     context.actor = this.actor;
     context.effects = context.data.effects;
     context.items = context.data.items;
-    context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
     context.traits = context.data.items.filter((i) => i.type === "trait");
+    context.selectedTags = this._selectedTags;
     context.systemSource = this.actor.system._source;
     context.systemFields = this.document.system.schema.fields;
     context.system = this.system;
 
-    console.log("context", context.traits);
+    console.log("context", context);
     return context;
   }
 

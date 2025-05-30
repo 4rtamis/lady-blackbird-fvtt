@@ -87,6 +87,31 @@ Handlebars.registerHelper("times", function (n, block) {
   return accum;
 });
 
+Handlebars.registerHelper(
+  "ifTagSelected",
+  function (name, group, power, array, options) {
+    if (!Array.isArray(array)) return options.inverse(this);
+
+    const exists = array.some(
+      (el) =>
+        el.name === name && el.group === group && el.power === power.toString(),
+    );
+
+    return exists ? options.fn(this) : options.inverse(this);
+  },
+);
+
+Handlebars.registerHelper("let", function (options) {
+  const data = options.data ? Handlebars.createFrame(options.data) : {};
+  const context = {};
+
+  for (const [key, value] of Object.entries(options.hash)) {
+    context[key] = value;
+  }
+
+  return options.fn(context, { data });
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

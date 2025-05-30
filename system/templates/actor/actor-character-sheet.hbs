@@ -62,59 +62,100 @@
             {{#each traits}}
               <div class="border-x" data-menu="item" data-uuid="{{this.uuid}}">
                 <div class="border-b px-4 py-2">
-                  <h4
-                    class="m-0 font-serif text-xl font-normal"
-                    data-uuid="{{uuid}}"
-                  >
+                  <h4 class="m-0 font-serif text-xl font-normal">
                     {{name}}
                   </h4>
                 </div>
                 <div class="px-2 py-2">
                   {{! Ungrouped Tags }}
-                  {{#each system.sortedTags.ungrouped as |tag|}}
-                    <div
-                      class="mb-1 flex flex-row items-center justify-start px-1"
-                    >
-                      {{#if tag.power}}
-                        {{#times tag.power}}
-                          <div class="mr-1 h-3 w-3 rounded-full bg-black"></div>
-                        {{/times}}
-                      {{else}}
-                        <div
-                          class="mr-1 h-3 w-3 rounded-full border border-black"
-                        ></div>
-                      {{/if}}
-                      <p class="my-0 text-base italic">{{tag.name}}</p>
-                    </div>
-                  {{/each}}
-
-                  {{! Grouped Tags }}
-                  {{#each system.sortedTags.grouped as |tags groupName|}}
-                    <div class="relative mb-2 border border-black p-1">
+                  {{#let traitName=name traitSystem=system}}
+                    {{#each traitSystem.sortedTags.ungrouped as |tag|}}
                       <div
-                        class="absolute left-1/2 top-0 w-max -translate-x-1/2 -translate-y-1/2 bg-white text-center text-[6pt] font-bold uppercase"
-                      >Pick one tag per roll</div>
-
-                      {{#each tags as |tag|}}
-                        <div
-                          class="mb-1 flex flex-row items-center justify-start"
-                        >
-                          {{#if tag.power}}
-                            {{#times tag.power}}
-                              <div
-                                class="mr-1 h-3 w-3 rounded-full bg-black"
-                              ></div>
-                            {{/times}}
-                          {{else}}
+                        class="mb-1 flex flex-row items-center justify-start px-1"
+                      >
+                        {{#if tag.power}}
+                          {{#times tag.power}}
                             <div
-                              class="mr-1 h-3 w-3 rounded-full border border-black"
+                              class="mr-1 h-3 w-3 rounded-full bg-black"
                             ></div>
-                          {{/if}}
-                          <p class="my-0 text-base italic">{{tag.name}}</p>
-                        </div>
-                      {{/each}}
-                    </div>
-                  {{/each}}
+                          {{/times}}
+                        {{else}}
+                          <div
+                            class="mr-1 h-3 w-3 rounded-full border border-black"
+                          ></div>
+                        {{/if}}
+                        {{#ifTagSelected
+                          tag.name "default" tag.power @root.selectedTags
+                        }}
+                          <p
+                            data-action="toggleTag"
+                            data-trait="{{traitName}}"
+                            data-name="{{tag.name}}"
+                            data-group="default"
+                            data-power="{{tag.power}}"
+                            class="my-0 text-base italic text-red-500"
+                          >{{tag.name}}</p>
+                        {{else}}
+                          <p
+                            data-action="toggleTag"
+                            data-trait="{{traitName}}"
+                            data-name="{{tag.name}}"
+                            data-group="default"
+                            data-power="{{tag.power}}"
+                            class="my-0 text-base italic"
+                          >{{tag.name}}</p>
+                        {{/ifTagSelected}}
+                      </div>
+                    {{/each}}
+
+                    {{! Grouped Tags }}
+                    {{#each traitSystem.sortedTags.grouped as |tags groupName|}}
+                      <div class="relative mb-2 border border-black p-1">
+                        <div
+                          class="absolute left-1/2 top-0 w-max -translate-x-1/2 -translate-y-1/2 bg-white text-center text-[6pt] font-bold uppercase"
+                        >Pick one tag per roll</div>
+
+                        {{#each tags as |tag|}}
+                          <div
+                            class="mb-1 flex flex-row items-center justify-start"
+                          >
+                            {{#if tag.power}}
+                              {{#times tag.power}}
+                                <div
+                                  class="mr-1 h-3 w-3 rounded-full bg-black"
+                                ></div>
+                              {{/times}}
+                            {{else}}
+                              <div
+                                class="mr-1 h-3 w-3 rounded-full border border-black"
+                              ></div>
+                            {{/if}}
+                            {{#ifTagSelected
+                              tag.name tag.group tag.power @root.selectedTags
+                            }}
+                              <p
+                                data-action="toggleTag"
+                                data-trait="{{traitName}}"
+                                data-name="{{tag.name}}"
+                                data-group="{{tag.group}}"
+                                data-power="{{tag.power}}"
+                                class="my-0 text-base italic text-red-500"
+                              >{{tag.name}}</p>
+                            {{else}}
+                              <p
+                                data-action="toggleTag"
+                                data-trait="{{traitName}}"
+                                data-name="{{tag.name}}"
+                                data-group="{{tag.group}}"
+                                data-power="{{tag.power}}"
+                                class="my-0 text-base italic"
+                              >{{tag.name}}</p>
+                            {{/ifTagSelected}}
+                          </div>
+                        {{/each}}
+                      </div>
+                    {{/each}}
+                  {{/let}}
 
                 </div>
               </div>
